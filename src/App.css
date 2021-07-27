@@ -38,17 +38,30 @@
 }
 body{
   background-color: #eee !important;
-  background-image: url("https://images-ext-2.discordapp.net/external/5FWJIGLyaul5euBqDR_zDZ56zKDXsNEKijL3AmY7_Ww/https/static.vecteezy.com/system/resources/previews/002/743/270/original/businessmen-social-conversation-network-discuss-social-network-chat-or-dialogue-with-chat-bubbles-flat-style-gradient-version-illustration-isolated-on-white-background-sharing-news-messages-vector.jpg?width=1340&height=670");
+  background-image: url("https://images-ext-2.discordapp.net/external/SajLQK6GpDux4f24pNQEcF_JzkU7xtzHDeseVFWD5A8/https/www.teahub.io/photos/full/185-1853582_wallpaper-lines-obliquely-stripes-glow-purple-cool-purple.jpg?width=1073&height=670");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .in{
   margin: 10px !important;
+  width: 300px !important;
 }
 .home{
   margin-top: 10%;
+  margin-right: 45%;
 }
 .link{
   text-decoration: none;
   color: black;
   font-weight: bold;
+  
+}
+.form{
+  margin-left: 50%;
+}
+span{
+  color:red;
+  font-weight: bold;
+  font-size: 12pt;
+  text-shadow: 2px 2px 15px black ;
 }
