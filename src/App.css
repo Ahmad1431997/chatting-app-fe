@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color: #eee !important;
+  background-image: url("https://images-ext-2.discordapp.net/external/5FWJIGLyaul5euBqDR_zDZ56zKDXsNEKijL3AmY7_Ww/https/static.vecteezy.com/system/resources/previews/002/743/270/original/businessmen-social-conversation-network-discuss-social-network-chat-or-dialogue-with-chat-bubbles-flat-style-gradient-version-illustration-isolated-on-white-background-sharing-news-messages-vector.jpg?width=1340&height=670");
+  background-size: cover;
+}
+.in{
+  margin: 10px !important;
+}
+.home{
+  margin-top: 10%;
+}
+.link{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
