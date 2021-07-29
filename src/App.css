@@ -36,32 +36,65 @@
     transform: rotate(360deg);
   }
 }
-body{
+body {
   background-color: #eee !important;
-  background-image: url("https://images-ext-2.discordapp.net/external/SajLQK6GpDux4f24pNQEcF_JzkU7xtzHDeseVFWD5A8/https/www.teahub.io/photos/full/185-1853582_wallpaper-lines-obliquely-stripes-glow-purple-cool-purple.jpg?width=1073&height=670");
+  background-image: url("https://wallpaperaccess.com/full/381735.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  color: white !important;
 }
-.in{
+.in {
   margin: 10px !important;
   width: 300px !important;
 }
-.home{
+.home {
   margin-top: 10%;
   margin-right: 45%;
 }
-.link{
+.link {
   text-decoration: none;
   color: black;
   font-weight: bold;
-  
 }
-.form{
+.form {
   margin-left: 50%;
 }
-span{
-  color:red;
+span {
+  color: red;
   font-weight: bold;
   font-size: 12pt;
-  text-shadow: 2px 2px 15px black ;
+  text-shadow: 2px 2px 15px black;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.chats {
+  border: double 3px cyan;
+  width: 20%;
+  margin-left: 2%;
+  margin-top: 2%;
+  max-height: 350px;
+  overflow-y: scroll;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.groups {
+  border: double 3px cyan;
+  width: 20%;
+  margin-left: 2%;
+  margin-top: 2%;
+  max-height: 350px;
+  overflow-y: scroll;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.optselect{
+  color: black ;
+  font-weight: bold;
 }

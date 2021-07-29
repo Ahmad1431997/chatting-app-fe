@@ -1,4 +1,4 @@
-import { SET_USER } from "./types";
+import { FETCH_USERS, SET_USER } from "./types";
 
 import instance from "./instance";
 import decode from "jwt-decode";
@@ -11,7 +11,7 @@ export const signup = (userData, history) => {
     try {
       const res = await instance.post("/signup", userData);
       dispatch(setUser(res.data.token));
-      history.push("/");
+      history.push("/main");
     } catch (error) {
       console.log(error.message);
     }
@@ -22,9 +22,10 @@ export const signup = (userData, history) => {
 export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
+      console.log("hi")
       const res = await instance.post("/signin", userData);
       dispatch(setUser(res.data.token));
-      history.push("/");
+      history.push("/main");
     } catch (error) {
       console.log(error.message);
     }
@@ -32,9 +33,15 @@ export const signin = (userData, history) => {
 };
 
 
+export const signout = (history) =>{
+  history.push("/");
+  return setUser()
+}
+
 
 const setUser = (token) => {
   if (token) {
+    console.log(token)
     localStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     return {
@@ -65,3 +72,20 @@ export const checkForToken = () => {
   }
   return setUser();
 };
+
+
+
+export const fetchUsers = ()=>{
+  return async (dispatch)=>{
+  try {
+      const res = await instance.get("/fetch");
+      console.log(res.data)
+      dispatch({
+          type:FETCH_USERS,
+          payload: res.data,
+      })
+  } catch (error) {
+      console.log(error.message)
+  }
+  
+}}
