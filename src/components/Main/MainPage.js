@@ -1,10 +1,12 @@
 
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
+import { Route, Switch, useHistory } from 'react-router'
 import { signout } from '../../store/actions/authActions'
 import ChatList from '../Chat/ChatList'
 import GroupList from '../Group/GroupList'
+import Profile from '../Profile/Profile'
+import Room from '../Room/Room'
 
 function MainPage() {
     const dispatch = useDispatch()
@@ -12,9 +14,12 @@ function MainPage() {
     
     return (
         <div>
-        
-                    <ChatList/>
+                    <Profile/>
+                    <ChatList/> 
                     <GroupList/>
+                   
+                    {/* <Room/> */}
+                   
 
             {/* <button onClick={() => { dispatch(signout(history)) }} >Logout</button> */}
             {/* put it in the user profile */}

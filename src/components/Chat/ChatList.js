@@ -13,7 +13,8 @@ const ChatList = () => {
   });
 
   const _users = useSelector((state) => state.user.allUsers);
-
+  const user = useSelector((state)=>state.user.user)
+  const otherUsers=_users.filter((_id)=>_id.id!== user.id)
   console.log("from here");
   console.log(_users);
 
@@ -28,13 +29,16 @@ const ChatList = () => {
     console.log("test");
     dispatch(createRoom(room));
     handleClose();
+    setRoom({
+      users: [],
+    })
   };
 
   const rooms = useSelector((state) => state.rooms.rooms);
-
+console.log(rooms)
   const chatList = rooms
     .filter((room) => room.usersId.length === 2)
-    .map((_room) => _users.find((_id) => _id.id === _room.usersId[0]));
+    .map((_room) => otherUsers.find((_id) => _id.id === _room.usersId[0]));
 
   console.log(chatList);
 
@@ -47,7 +51,7 @@ const ChatList = () => {
     console.log(event.target.name, event.target.value);
 
     setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
-
+  
     console.log(room);
   };
 
@@ -73,11 +77,11 @@ const ChatList = () => {
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Start a chat</Modal.Title>
+            <Modal.Title style={{color:"black"}}>New Chat</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Label>contact</Form.Label>
+              <Form.Label style={{color:"black"}}>Select a reciver</Form.Label>
 
               <Form.Control
                 name="users"
@@ -87,13 +91,14 @@ const ChatList = () => {
                 id="inlineFormCustomSelect"
                 onChange={handleChange}
                 custom
+                required
                 // multiple
               >
 
 
                 <option value="">Select User</option>
 
-                {_users.map((user) => (
+                {otherUsers.map((user) =>  (
                   <option value={user.id} name={user.username} key={user.id}>
                     {user.username}
                   </option>
@@ -119,3 +124,25 @@ const ChatList = () => {
 };
 
 export default ChatList;
+
+
+
+
+
+
+// {otherUsers.map((user) =>
+//   room.users.includes(user.id) ? (
+//     <option
+//       disabled
+//       value={user.id}
+//       name={user.username}
+//       key={user.id}
+//     >
+//       {user.username}
+//     </option>
+//   ) : (
+//     <option value={user.id} name={user.username} key={user.id}>
+//       {user.username}
+//     </option>
+//   )
+// )}

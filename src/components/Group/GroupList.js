@@ -11,12 +11,13 @@ import Select from "react-select";
 const GroupList = () => {
   const [show, setShow] = useState(false);
   const [room, setRoom] = useState({
-    users: [],
+    users: [],name:""
     // image:"http://zslchrobry.lezajsk.pl/wp-content/uploads/2017/11/users.png"
   });
 
   const _users = useSelector((state) => state.user.allUsers);
-
+  const user=useSelector((state)=>state.user.user)
+  const otherUsers=_users.filter((_id)=>_id.id!== user.id)
 
   const dispatch = useDispatch();
 
@@ -27,6 +28,9 @@ const GroupList = () => {
     event.preventDefault();
     dispatch(createRoom(room));
     handleClose();
+    setRoom({
+      users: [],name:""
+    })
   };
 
   const rooms = useSelector((state) => state.rooms.rooms);
@@ -53,7 +57,7 @@ const GroupList = () => {
     console.log(room);
   };
 
-  const TheListOfUsers = _users.map((user) => {
+  const TheListOfUsers = otherUsers.map((user) => {
     return { value: user.id, label: user.username };
   });
 
@@ -79,11 +83,11 @@ const GroupList = () => {
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title style={{color:"black"}}>New Group</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Label>contact</Form.Label>
+              <Form.Label style={{color:"black"}}>Select members</Form.Label>
               <Select
                 isMulti
                 name="users"
@@ -91,23 +95,28 @@ const GroupList = () => {
                 className="basic-multi-select optselect"
                 classNamePrefix="select"
                 onChange={handleChange}
+                
                 //  value={selectedOptions}
-              />
+              /><br/>
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>Group Name</Form.Label>
+                {/* <Form.Label style={{color:"black"}}>Group Name</Form.Label> */}
                 <Form.Control
                   name="name"
                   type="text"
                   onChange={handleInputChange}
                   placeholder="group name"
+                  required
                 />
               </Form.Group>
 
               <Modal.Footer>
-                <button className="btn secondary btn-primary" type="submit">
+               {room.users.length>1?<button className="btn secondary btn-primary" type="submit">
                   {" "}
-                  Start a Chat
-                </button>
+                  Create a group
+                </button>:<button disabled className="btn secondary btn-primary" type="submit">
+                  {" "}
+                  Create a group
+                </button>} 
 
                 <Button variant="secondary" onClick={handleClose}>
                   Close
