@@ -6,7 +6,7 @@ export const createRoom = (newRoom) => {
     try {
         // if(user)
         // console.log("hello")
-        // console.log(newRoom)
+        console.log(newRoom)
       const res = await instance.post("/newroom", newRoom);
       dispatch({
         type: NEW_ROOM,
@@ -14,6 +14,7 @@ export const createRoom = (newRoom) => {
           room: res.data,
         },
       });
+      console.log(res.data)
     } catch (error) {
       console.log(error.message);
     }
