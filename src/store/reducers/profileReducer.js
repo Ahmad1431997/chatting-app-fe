@@ -1,16 +1,17 @@
-import { UPDATE_PROFILE } from "../actions/types";
+import { UPDATE_PROFILE, FETCH_PROFILE } from "../actions/types";
 
 const initialState = {
-  // profiles: [],
-  profiles: [
-    { userId: 45, gendar: "male", status: "enjoying my work", image: "" },
-    { userId: 46, gendar: "male", status: "I'm too busy", image: "" },
-    { userId: 51, gendar: "male", status: "so sleepy", image: "" },
-  ],
+  profiles: [],
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_PROFILE:
+      return {
+        ...state,
+        profiles: action.payload,
+      };
+
     case UPDATE_PROFILE:
       const { updatedProfile } = action.payload;
       return {

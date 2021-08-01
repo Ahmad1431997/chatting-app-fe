@@ -1,4 +1,4 @@
-import { Button, Modal, Form, FormGroup } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ChatItem from "./ChatItem";
@@ -16,8 +16,6 @@ const ChatList = () => {
   const _users = useSelector((state) => state.user.allUsers);
   const user = useSelector((state) => state.user.user);
   const otherUsers = _users.filter((_id) => _id.id !== user.id);
-  console.log("from here");
-  console.log(_users);
 
   const dispatch = useDispatch();
 
@@ -36,7 +34,6 @@ const ChatList = () => {
 
   // [1,2]
 
-
   console.log(rooms);
   const chatList = rooms
     .filter((room) => room.usersId.length === 2)
@@ -47,15 +44,10 @@ const ChatList = () => {
     <ChatItem _room={userobj} key={userobj.id} />
   ));
 
-  console.log(newList)
+  console.log(newList);
 
   const handleChange = (event) => {
-    console.log("here");
-    console.log(event.target.name, event.target.value);
-
     setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
-
-    console.log(room);
   };
 
   return (
