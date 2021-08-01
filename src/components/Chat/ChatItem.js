@@ -23,8 +23,10 @@ const ChatItem = ({ _room }) => {
             <div className="col-md-4">
               <img
                 className="card-img"
-                src={"https://i.dlpng.com/static/png/7115850_preview.png"}
-                alt="ahmad"
+                src={
+                  "https://images-ext-1.discordapp.net/external/-Gh1ENyBFoPNXBjPeDgkgEjkjrbaKJHePdLJsYrVri8/https/cdn.iconscout.com/icon/free/png-512/user-avatar-contact-portfolio-personal-portrait-profile-2-5270.png?width=468&height=468"
+                }
+                alt={_room.username}
               />
             </div>
             <div className="col-md-8">

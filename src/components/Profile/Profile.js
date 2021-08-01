@@ -29,9 +29,8 @@ const Profile = () => {
     setProfile({ ..._profile, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
-    console.log(_profile);
     event.preventDefault();
-    console.log(profile.id);
+
     dispatch(updateProfile(_profile, profile.id));
     handleClose();
     setProfile({
