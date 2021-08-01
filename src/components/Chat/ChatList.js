@@ -11,10 +11,11 @@ const ChatList = () => {
   const [room, setRoom] = useState({
     users: [],
   });
-
+  const rooms = useSelector((state) => state.rooms.rooms);
+  console.log(rooms);
   const _users = useSelector((state) => state.user.allUsers);
-  const user = useSelector((state)=>state.user.user)
-  const otherUsers=_users.filter((_id)=>_id.id!== user.id)
+  const user = useSelector((state) => state.user.user);
+  const otherUsers = _users.filter((_id) => _id.id !== user.id);
   console.log("from here");
   console.log(_users);
 
@@ -23,7 +24,6 @@ const ChatList = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("test");
@@ -31,18 +31,17 @@ const ChatList = () => {
     handleClose();
     setRoom({
       users: [],
-    })
+    });
   };
 
-  const rooms = useSelector((state) => state.rooms.rooms);
-console.log(rooms)
+  console.log(rooms);
   const chatList = rooms
     .filter((room) => room.usersId.length === 2)
     .map((_room) => otherUsers.find((_id) => _id.id === _room.usersId[0]));
-
   console.log(chatList);
-
-  const newList = chatList.map((userobj) => (<ChatItem _room={userobj} key={userobj.id} />));
+  const newList = chatList.map((userobj) => (
+    <ChatItem _room={userobj} key={userobj.id} />
+  ));
 
   // console.log(newList)
 
@@ -51,7 +50,7 @@ console.log(rooms)
     console.log(event.target.name, event.target.value);
 
     setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
-  
+
     console.log(room);
   };
 
@@ -77,11 +76,13 @@ console.log(rooms)
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title style={{color:"black"}}>New Chat</Modal.Title>
+            <Modal.Title style={{ color: "black" }}>New Chat</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Label style={{color:"black"}}>Select a reciver</Form.Label>
+              <Form.Label style={{ color: "black" }}>
+                Select a reciver
+              </Form.Label>
 
               <Form.Control
                 name="users"
@@ -94,11 +95,9 @@ console.log(rooms)
                 required
                 // multiple
               >
-
-
                 <option value="">Select User</option>
 
-                {otherUsers.map((user) =>  (
+                {otherUsers.map((user) => (
                   <option value={user.id} name={user.username} key={user.id}>
                     {user.username}
                   </option>
@@ -124,11 +123,6 @@ console.log(rooms)
 };
 
 export default ChatList;
-
-
-
-
-
 
 // {otherUsers.map((user) =>
 //   room.users.includes(user.id) ? (
