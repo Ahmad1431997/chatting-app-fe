@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const GroupItem = ({ _room }) => {
   return (
     <div>
-      <Link to={`rooms/${_room.id}`}>
+      <Link to={`/rooms/${_room.id}`}>
       <div
         className="card mb-3"
         style={{
