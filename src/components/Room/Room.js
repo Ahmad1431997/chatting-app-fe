@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { createMessage } from "../../store/actions/messageActions";
 
-
-
-
 function Room() {
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const [socket, setSocket] = useState(null);
   const messages = useSelector((state) => state.messages.messages);
-  console.log(messages);
+
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   console.log(user);
@@ -31,15 +30,21 @@ function Room() {
   console.log(text);
   useEffect(() => {
     if (socket) {
+      socket.off("message");
+      socket.on("message", ({ message }) => {
+        console.log(message, "from room");
+        dispatch(createMessage(message));
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket && text !== "") {
       socket.emit("message", {
         senderId: user.id,
         image: "gfyjgjyg",
         text: text,
         roomId: +roomId,
-      });
-      socket.on("message", (message) => {
-        console.log(message,"from room")
-        dispatch(createMessage(message));
       });
     }
   }, [text]);
@@ -62,8 +67,14 @@ function Room() {
       <div className="room-cont">
         <div className="room-head">Title</div>
         <div className="body-send" style={{ color: "black" }}>
-          {_messages ? _messages.map((message) => message.text) : ""}
-          {text}
+          {_messages
+            ? _messages.map((message) => (
+                <>
+                  <div>{message.text} </div>
+                  <hr />
+                </>
+              ))
+            : ""}
         </div>
         {/* <div className="body-send">dsfdssd</div> */}
 

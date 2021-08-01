@@ -12,10 +12,10 @@ const ChatList = () => {
     users: [],
   });
   const rooms = useSelector((state) => state.rooms.rooms);
-  console.log(rooms);
   const _users = useSelector((state) => state.user.allUsers);
   const user = useSelector((state) => state.user.user);
   const otherUsers = _users.filter((_id) => _id.id !== user.id);
+  console.log(otherUsers);
 
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const ChatList = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("test");
+
     dispatch(createRoom(room));
     handleClose();
     setRoom({
@@ -32,19 +32,15 @@ const ChatList = () => {
     });
   };
 
-  // [1,2]
-
-  console.log(rooms);
-  const chatList = rooms
+  const finalList = rooms
     .filter((room) => room.usersId.length === 2)
-    .map((_room) => otherUsers.find((_id) => _id.id === _room.usersId[0]));
-  console.log(chatList);
+    .filter((users) => users.usersId.includes(user.id))
+    .map((_room) => otherUsers.find((_id) => _room.usersId.includes(_id.id)));
+  const uniqueChatList = [...new Set(finalList)];
 
-  const newList = chatList.map((userobj) => (
+  const newList = uniqueChatList.map((userobj) => (
     <ChatItem _room={userobj} key={userobj.id} />
   ));
-
-  console.log(newList);
 
   const handleChange = (event) => {
     setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
@@ -136,3 +132,6 @@ export default ChatList;
 //     </option>
 //   )
 // )}
+/* const finalList = rooms
+    .filter((room) => room.usersId.length === 2)
+    .filter((users) => users.usersId.includes(user.id));*/

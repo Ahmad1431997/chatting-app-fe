@@ -12,10 +12,9 @@ const initialState = {
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_MESSAGE:
-      const message = action.payload;
       return {
         ...state,
-        messages: [...state.messages, message],
+        messages: [...state.messages, action.payload],
       };
     case FETCH_MESSAGES:
       return {
