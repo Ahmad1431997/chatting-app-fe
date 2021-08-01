@@ -7,6 +7,10 @@ import GroupList from "../Group/GroupList";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { createMessage } from "../../store/actions/messageActions";
+
+
+
+
 function Room() {
   const [text, setText] = useState("");
   const [socket, setSocket] = useState(null);
@@ -34,6 +38,7 @@ function Room() {
         roomId: +roomId,
       });
       socket.on("message", (message) => {
+        console.log(message,"from room")
         dispatch(createMessage(message));
       });
     }
@@ -48,7 +53,7 @@ function Room() {
   // voicenote: null
 
   const _messages = messages.filter((msg) => msg.roomId === +roomId);
-  // if (!message) return <Redirect to="/main" />;
+  if (!_messages) return <Redirect to="/main" />;
 
   return (
     <>

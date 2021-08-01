@@ -34,16 +34,20 @@ const ChatList = () => {
     });
   };
 
+  // [1,2]
+
+
   console.log(rooms);
   const chatList = rooms
     .filter((room) => room.usersId.length === 2)
     .map((_room) => otherUsers.find((_id) => _id.id === _room.usersId[0]));
   console.log(chatList);
+
   const newList = chatList.map((userobj) => (
     <ChatItem _room={userobj} key={userobj.id} />
   ));
 
-  // console.log(newList)
+  console.log(newList)
 
   const handleChange = (event) => {
     console.log("here");

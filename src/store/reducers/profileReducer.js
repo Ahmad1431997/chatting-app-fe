@@ -3,9 +3,9 @@ import { UPDATE_PROFILE } from "../actions/types";
 const initialState = {
   // profiles: [],
   profiles: [
-    { userId: 19, gendar: "male", status: "I'm too busy", image: "" },
-    { userId: 17, gendar: "male", status: "enjoying my work", image: "" },
-    { userId: 18, gendar: "male", status: "so sleepy", image: "" },
+    { userId: 45, gendar: "male", status: "enjoying my work", image: "" },
+    { userId: 46, gendar: "male", status: "I'm too busy", image: "" },
+    { userId: 51, gendar: "male", status: "so sleepy", image: "" },
   ],
 };
 

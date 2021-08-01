@@ -10,7 +10,7 @@ const ChatItem = ({ _room }) => {
 
   return (
     <div>
-      <Link to={`rooms/${room.roomId}`}>
+      <Link to={`/rooms/${room.roomId}`}>
         <div
           className="card mb-3"
           style={{
