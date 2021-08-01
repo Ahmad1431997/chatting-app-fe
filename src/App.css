@@ -94,21 +94,21 @@ span {
   flex-direction: column;
 }
 
-.optselect{
-  color: black ;
+.optselect {
+  color: black;
   font-weight: bold;
 }
-.room-cont{
-  background-color: green;
+.room-cont {
+  background-image: url("https://images-ext-1.discordapp.net/external/BUqzOfVJD1waKp4wgSyYpyYJ5PKwwpdw4NosUNyhtig/https/thumbs.dreamstime.com/b/seamless-mobile-apps-pattern-web-page-64452032.jpg?width=468&height=468");
   position: absolute;
   left: 28%;
-  top:2.25%;
+  top: 2.25%;
   width: 70%;
   min-height: 95%;
   max-height: 95%;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
-.room-head{
+.room-head {
   position: fixed;
   z-index: 1;
   background-color: rgba(255, 0, 0, 0.219);
@@ -116,14 +116,14 @@ span {
   text-align: center;
   width: 70%;
 }
-.footer{
+.footer {
   position: relative;
-  
+
   min-height: 40px;
   max-height: 40px;
   margin-top: 80%;
 }
-.body-send{
+.body-send {
   position: relative;
   float: left;
   width: fit-content;
@@ -133,7 +133,7 @@ span {
   height: auto;
   word-wrap: break-word;
   color: #000000;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   background-color: #ffffff;
   border: 1px solid #000000;
   padding: 6px 8px;
@@ -141,10 +141,10 @@ span {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  margin: 10px;  
+  margin: 10px;
 }
 
-.profile-cont{
+.profile-cont {
   border: double 3px cyan;
   width: 20%;
   margin-left: 2%;
@@ -154,4 +154,46 @@ span {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+/* gukguguigiggiggig */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 30px;
+  min-height: 30rem;
+}
+form {
+  max-width: 350px;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+}
+
+.name-field {
+  margin-bottom: 40px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.render-chat {
+  max-width: 350px;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+}
+
+h3 {
+  color: #2f72da;
+}
+
+span {
+  color: black;
+}
+body {
+  color: black !important;
 }

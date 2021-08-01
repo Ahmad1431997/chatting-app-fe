@@ -1,21 +1,23 @@
-// import instance from "./instance";
-// import { CREATE_MESSAGE } from "./types";
+import instance from "./instance";
+import { CREATE_MESSAGE, FETCH_MESSAGES } from "./types";
 
-// export const createRoom = (newMessage) => {
-//   return async (dispatch) => {
-//     try {
-//         // if(user)
-//         // console.log("hello")
-//         // console.log(newRoom)
-//       const res = await instance.post("/newmessage", newMessage;
-//       dispatch({
-//         type: CREATE_MESSAGE,
-//         payload: {
-//           message: res.data,
-//         },
-//       });
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-// };
+export const createMessage = (message) => {
+  return {
+    type: CREATE_MESSAGE,
+    payload: message,
+  };
+};
+export const fetchMessages = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/messages");
+      console.log(res.data);
+      dispatch({
+        type: FETCH_MESSAGES,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
