@@ -123,26 +123,6 @@ span {
   max-height: 40px;
   margin-top: 80%;
 }
-.body-send {
-  position: relative;
-  float: left;
-  width: fit-content;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  max-width: 300px;
-  height: auto;
-  word-wrap: break-word;
-  color: #000000;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
-  border: 1px solid #000000;
-  padding: 6px 8px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  margin: 10px;
-}
 
 .profile-cont {
   border: double 3px cyan;
@@ -155,8 +135,6 @@ span {
   display: flex;
   flex-direction: column;
 }
-/* gukguguigiggiggig */
-
 
 form {
   max-width: 350px;
@@ -165,40 +143,43 @@ form {
   box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
 }
 
-/* 
-
-.card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 30px;
-  min-height: 30rem;
-}
-
-.name-field {
-  margin-bottom: 40px;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px;
-  background: transparent;
+.body-recive {
+  position: relative;
+  margin-left: 60%;
+  width: fit-content;
+  overflow-y: scroll;
+  margin-top: 2.5%;
+  max-width: 300px;
+  height: auto;
+  word-wrap: break-word;
+  color: #000000;
+  border: 1px solid #ccc;
+  background-color: hsl(229, 74%, 42%);
+  border: 1px solid #000000;
+  padding: 6px 8px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
 }
+.body-send {
+  position: relative;
+  margin-top: 2.5%;
 
-.render-chat {
-  max-width: 350px;
+  width: fit-content;
+  overflow-y: scroll;
+
+  max-width: 300px;
+  height: auto;
+  word-wrap: break-word;
+  color: #000000;
+  border: 1px solid #ccc;
+  background-color: #28c919;
+  border: 1px solid #000000;
+  padding: 6px 8px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+  margin-left: 40%;
 }
-
-h3 {
-  color: #2f72da;
-}
-
-span {
-  color: black;
-}
-body {
-  color: black !important;
-} */

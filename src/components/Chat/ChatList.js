@@ -15,12 +15,14 @@ const ChatList = () => {
   const _users = useSelector((state) => state.user.allUsers);
   const user = useSelector((state) => state.user.user);
   const otherUsers = _users.filter((_id) => _id.id !== user.id);
-  console.log(otherUsers);
 
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleChange = (event) => {
+    setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,10 +43,6 @@ const ChatList = () => {
   const newList = uniqueChatList.map((userobj) => (
     <ChatItem _room={userobj} key={userobj.id} />
   ));
-
-  const handleChange = (event) => {
-    setRoom({ ...room, [event.target.name]: [parseInt(event.target.value)] });
-  };
 
   return (
     <div className="chats">

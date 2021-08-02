@@ -1,12 +1,17 @@
 import React from "react";
+import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ChatItem = ({ _room }) => {
+  const loading = useSelector((state) => state.rooms.loading);
   const rooms = useSelector((state) => state.rooms.rooms);
-  const room = rooms.find((room) => room.usersId.includes(_room.id));
-  // const members = users.map(usr=> usr.id)
-  console.log(room);
+  const user = useSelector((state) => state.user.user);
+
+  if (loading) return <Spinner />;
+  const room = rooms.find(
+    (room) => room.usersId.includes(_room.id) && room.usersId.includes(user.id)
+  );
 
   return (
     <div>

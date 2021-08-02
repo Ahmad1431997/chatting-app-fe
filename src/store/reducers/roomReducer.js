@@ -2,6 +2,7 @@ import { FETCH_ROOMS, NEW_ROOM } from "../actions/types";
 
 const initialState = {
   rooms: [],
+  loading: true,
 };
 
 const roomReducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ const roomReducer = (state = initialState, action) => {
       return {
         ...state,
         rooms: action.payload,
+        loading: false,
       };
     default:
       return state;
