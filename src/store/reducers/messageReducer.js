@@ -2,11 +2,8 @@ import { CREATE_MESSAGE, FETCH_MESSAGES } from "../actions/types";
 
 const initialState = {
   messages: [],
-  // messages:[
-  //   {id:1,text:"hello roomId-1",senderId:5,roomId:1},
-  //   {id:2,text:"hello roomId-2",senderId:5,roomId:2},
-  //   {id:3,text:"hello roomId-3",senderId:5,roomId:3},
-  // ]
+
+  loading: true,
 };
 
 const messageReducer = (state = initialState, action) => {
@@ -20,6 +17,7 @@ const messageReducer = (state = initialState, action) => {
       return {
         ...state,
         messages: action.payload,
+        loading: false,
       };
 
     default:

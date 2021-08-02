@@ -7,56 +7,65 @@ import GroupList from "../Group/GroupList";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { createMessage } from "../../store/actions/messageActions";
+import { Spinner } from "react-bootstrap";
 
 function Room() {
+  const dispatch = useDispatch();
+  const { roomId } = useParams();
+  console.log(roomId);
   const [text, setText] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const [socket, setSocket] = useState(null);
   const messages = useSelector((state) => state.messages.messages);
+  const loading = useSelector((state) => state.rooms.loading);
+
+  const rooms = useSelector((state) => state.rooms.rooms);
+  const users = useSelector((state) => state.user.allUsers);
 
   const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
-  console.log(user);
-  const { roomId } = useParams();
 
   useEffect(() => {
     setSocket(io("localhost:8080"));
   }, []);
 
   const handleOnEnter = (text) => {
-    setText(text);
+    setText(`${user.username} : ${text}`);
   };
-  console.log(text);
+
   useEffect(() => {
     if (socket) {
       socket.off("message");
       socket.on("message", ({ message }) => {
-        console.log(message, "from room");
         dispatch(createMessage(message));
       });
     }
   }, [socket]);
 
   useEffect(() => {
-    if (socket && text !== "") {
+    if (socket && text !== null) {
       socket.emit("message", {
         senderId: user.id,
-        image: "gfyjgjyg",
+
+        image: "",
         text: text,
         roomId: +roomId,
       });
     }
   }, [text]);
 
-  // createdAt: "2021-07-31T22:16:48.133Z"
-  // id: 19
-  // image: "gfyjgjyg"
-  // roomId: 3
-  // text: "hi ahmad"
-  // updatedAt: "2021-07-31T22:16:48.133Z"
-  // voicenote: null
+  const title = () => {
+    if (loading) return <Spinner />;
+    const certainRoom = rooms.find((room) => room.roomId === +roomId);
 
+    if (certainRoom.usersId.length > 2) {
+      return certainRoom.name;
+    } else {
+      return users.find(
+        (_user) =>
+          _user.id == certainRoom.usersId.filter((id) => id !== user.id)
+      ).username;
+    }
+  };
   const _messages = messages.filter((msg) => msg.roomId === +roomId);
   if (!_messages) return <Redirect to="/main" />;
 
@@ -65,23 +74,25 @@ function Room() {
       <ChatList />
       <GroupList />
       <div className="room-cont">
-        <div className="room-head">Title</div>
-        <div className="body-send" style={{ color: "black" }}>
+        <div className="room-head">{title()}</div>
+        <div style={{ color: "black" }}>
           {_messages
             ? _messages.map((message) => (
                 <>
-                  <div>{message.text} </div>
-                  <hr />
+                  {user.id === message.senderId ? (
+                    <>
+                      <div className="body-send">{message.text}</div>
+                    </>
+                  ) : (
+                    <div className="body-recive">{message.text} </div>
+                  )}
                 </>
               ))
             : ""}
         </div>
-        {/* <div className="body-send">dsfdssd</div> */}
 
         <div className="footer">
           <InputEmoji
-            value={text}
-            //   onChange={setText}
             cleanOnEnter
             onEnter={handleOnEnter}
             placeholder="Type a message"
