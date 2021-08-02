@@ -20,6 +20,7 @@ const profileReducer = (state = initialState, action) => {
           profile.id === updatedProfile.id ? updatedProfile : profile
         ),
       };
+
     default:
       return state;
   }

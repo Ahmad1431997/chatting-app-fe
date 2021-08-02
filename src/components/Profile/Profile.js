@@ -1,14 +1,19 @@
-import { Button, Modal, Form } from "react-bootstrap";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+//Styling
+import { Button, Modal, Form } from "react-bootstrap";
 import { RiEdit2Fill } from "@react-icons/all-files/ri/RiEdit2Fill";
+
+//Actions
 import { updateProfile } from "../../store/actions/profileActions";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.user);
   const profiles = useSelector((state) => state.profiles.profiles);
+
   const [show, setShow] = useState(false);
+
   const [_profile, setProfile] = useState({
     image: "",
     status: "",
@@ -25,12 +30,13 @@ const Profile = () => {
   const handleImage = (event) => {
     setProfile({ ..._profile, image: event.target.files[0] });
   };
+
   const handleChange = (event) => {
     setProfile({ ..._profile, [event.target.name]: event.target.value });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
     dispatch(updateProfile(_profile, profile.id));
     handleClose();
     setProfile({
@@ -39,12 +45,14 @@ const Profile = () => {
       gender: "",
     });
   };
+
   return (
     <div className="profile-cont">
+      {/*Remove inline styling */}
       <span style={{ color: "white" }}>
         <RiEdit2Fill color="black" size="2em" onClick={handleShow} />
       </span>
-
+      {/*Remove break and add a margin instead */}
       <br />
       <h2>{user.username}</h2>
       <h3>{profile ? profile.gendar : ""}</h3>
@@ -52,12 +60,14 @@ const Profile = () => {
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
+            {/*Remove inline styling */}
             <Modal.Title style={{ color: "black" }}>New Chat</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
+              {/*Remove inline styling */}
               <Form.Label style={{ color: "black" }}>
-                Select a reciver
+                Select a receiver
               </Form.Label>
 
               <Form.Control
@@ -87,7 +97,7 @@ const Profile = () => {
 
               <Modal.Footer>
                 <button className="btn secondary btn-primary" type="submit">
-                  UpdateProfile
+                  Update Profile
                 </button>
 
                 <Button variant="secondary" onClick={handleClose}>

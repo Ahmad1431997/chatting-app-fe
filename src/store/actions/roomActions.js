@@ -16,11 +16,11 @@ export const createRoom = (newRoom) => {
     }
   };
 };
+
 export const fetchRooms = () => {
   return async (dispatch) => {
     try {
       const res = await instance.get("/rooms");
-
       dispatch({
         type: FETCH_ROOMS,
         payload: res.data,

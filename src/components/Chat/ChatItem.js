@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"; //Not needed
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"; //Remove unused import
 
 const ChatItem = ({ _room }) => {
   const rooms = useSelector((state) => state.rooms.rooms);
   const room = rooms.find((room) => room.usersId.includes(_room.id));
-  // const members = users.map(usr=> usr.id)
-  console.log(room);
+  // const members = users.map(usr=> usr.id) //Remove unused code
+  console.log(room); //Remove console log
 
   return (
     <div>
@@ -17,7 +17,7 @@ const ChatItem = ({ _room }) => {
             maxWidth: "150px",
             maxHeight: "100px",
             backgroundColor: "darkgray",
-          }}
+          }} //Remove inline styling
         >
           <div className="row no-gutters">
             <div className="col-md-4">
@@ -31,9 +31,10 @@ const ChatItem = ({ _room }) => {
             </div>
             <div className="col-md-8">
               <div>
+                {/*Remove inline styling */}
                 <p className="card-title" style={{ marginTop: "10px" }}>
+                  {/*Remove unused code */}
                   {/* {_room.users.includes(user.id)? <p>{users.name}</p> : ""}  */}
-
                   {_room.username}
                 </p>
               </div>

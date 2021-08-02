@@ -2,6 +2,7 @@ import { CREATE_MESSAGE, FETCH_MESSAGES } from "../actions/types";
 
 const initialState = {
   messages: [],
+  //Remove unused code
   // messages:[
   //   {id:1,text:"hello roomId-1",senderId:5,roomId:1},
   //   {id:2,text:"hello roomId-2",senderId:5,roomId:2},
@@ -16,6 +17,7 @@ const messageReducer = (state = initialState, action) => {
         ...state,
         messages: [...state.messages, action.payload],
       };
+
     case FETCH_MESSAGES:
       return {
         ...state,

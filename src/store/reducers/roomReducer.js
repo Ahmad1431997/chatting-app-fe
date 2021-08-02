@@ -12,11 +12,13 @@ const roomReducer = (state = initialState, action) => {
         ...state,
         rooms: [...state.rooms, room],
       };
+
     case FETCH_ROOMS:
       return {
         ...state,
         rooms: action.payload,
       };
+
     default:
       return state;
   }

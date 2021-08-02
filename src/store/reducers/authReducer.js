@@ -1,9 +1,8 @@
 import { FETCH_USERS, SET_USER } from "../actions/types";
 
 const initialState = {
-  user: null ,
-  allUsers: []
-
+  user: null,
+  allUsers: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -13,7 +12,8 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-      case FETCH_USERS:
+
+    case FETCH_USERS:
       return {
         ...state,
         allUsers: action.payload,

@@ -3,8 +3,6 @@ import { FETCH_USERS, SET_USER } from "./types";
 import instance from "./instance";
 import decode from "jwt-decode";
 
-
-
 //signup action
 export const signup = (userData, history) => {
   return async (dispatch) => {
@@ -22,7 +20,7 @@ export const signup = (userData, history) => {
 export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
-      console.log("hi")
+      console.log("hi");
       const res = await instance.post("/signin", userData);
       dispatch(setUser(res.data.token));
       history.push("/main");
@@ -32,16 +30,14 @@ export const signin = (userData, history) => {
   };
 };
 
-
-export const signout = (history) =>{
+export const signout = (history) => {
   history.push("/");
-  return setUser()
-}
-
+  return setUser();
+};
 
 const setUser = (token) => {
   if (token) {
-    console.log(token)
+    console.log(token);
     localStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     return {
@@ -59,7 +55,7 @@ const setUser = (token) => {
 };
 
 export const checkForToken = () => {
-  const  token = localStorage.getItem("myToken");
+  const token = localStorage.getItem("myToken");
 
   if (token) {
     //check if token expiered or not when the user refresh the page
@@ -73,19 +69,17 @@ export const checkForToken = () => {
   return setUser();
 };
 
-
-
-export const fetchUsers = ()=>{
-  return async (dispatch)=>{
-  try {
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    try {
       const res = await instance.get("/fetch");
-      console.log(res.data)
+      console.log(res.data);
       dispatch({
-          type:FETCH_USERS,
-          payload: res.data,
-      })
-  } catch (error) {
-      console.log(error.message)
-  }
-  
-}}
+        type: FETCH_USERS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};

@@ -1,23 +1,28 @@
-import { Button, Modal, Form, FormGroup } from "react-bootstrap";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import GroupItem from "./GroupItem";
-import { createRoom } from "../../store/actions/roomActions";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Select from "react-select";
+
+//Styling
+import { Button, Modal, Form, FormGroup } from "react-bootstrap"; //Remove unused import
 import { BiCommentAdd } from "@react-icons/all-files/bi/BiCommentAdd";
 
-import Select from "react-select";
+//Components
+import GroupItem from "./GroupItem";
+
+//Actions
+import { createRoom } from "../../store/actions/roomActions";
 
 const GroupList = () => {
   const [show, setShow] = useState(false);
   const [room, setRoom] = useState({
-    users: [],name:""
-    // image:"http://zslchrobry.lezajsk.pl/wp-content/uploads/2017/11/users.png"
+    users: [],
+    name: "",
+    // image:"http://zslchrobry.lezajsk.pl/wp-content/uploads/2017/11/users.png" //Remove unused code
   });
 
   const _users = useSelector((state) => state.user.allUsers);
-  const user=useSelector((state)=>state.user.user)
-  const otherUsers=_users.filter((_id)=>_id.id!== user.id)
+  const user = useSelector((state) => state.user.user);
+  const otherUsers = _users.filter((_id) => _id.id !== user.id);
 
   const dispatch = useDispatch();
 
@@ -29,15 +34,16 @@ const GroupList = () => {
     dispatch(createRoom(room));
     handleClose();
     setRoom({
-      users: [],name:""
-    })
+      users: [],
+      name: "",
+    });
   };
 
   const rooms = useSelector((state) => state.rooms.rooms);
+
   const groupList = rooms
     .filter((room) => room.usersId.length > 2)
     .map((_room) => <GroupItem _room={_room} key={_room.id} />);
-
 
   const handleChange = (event) => {
     setRoom({
@@ -45,7 +51,7 @@ const GroupList = () => {
       users: [...room.users, event[event.length - 1].value],
     });
 
-    console.log(room);
+    console.log(room); //Remove console log
   };
 
   const handleInputChange = (event) => {
@@ -54,7 +60,7 @@ const GroupList = () => {
       [event.target.name]: event.target.value,
     });
 
-    console.log(room);
+    console.log(room); //Remove console log
   };
 
   const TheListOfUsers = otherUsers.map((user) => {
@@ -69,25 +75,26 @@ const GroupList = () => {
           zIndex: 2,
           marginBottom: "7px",
           backgroundColor: "darkcyan",
-        }}
+        }} //Remove inline styling
       >
+        {/*Remove inline styling */}
         <span style={{ color: "white" }}>
           <BiCommentAdd color="black" size="2em" onClick={handleShow} />
         </span>
         Your Groups
       </div>
-      <br />
-
+      <br /> {/*Remove break and add a margin instead*/}
       {groupList}
-
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title style={{color:"black"}}>New Group</Modal.Title>
+            {/*Remove inline styling */}
+            <Modal.Title style={{ color: "black" }}>New Group</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Label style={{color:"black"}}>Select members</Form.Label>
+              {/*Remove inline styling */}
+              <Form.Label style={{ color: "black" }}>Select members</Form.Label>
               <Select
                 isMulti
                 name="users"
@@ -95,9 +102,10 @@ const GroupList = () => {
                 className="basic-multi-select optselect"
                 classNamePrefix="select"
                 onChange={handleChange}
-                
-                //  value={selectedOptions}
-              /><br/>
+
+                //  value={selectedOptions} //Remove unused code
+              />
+              <br /> {/*Remove break and add a margin instead*/}
               <Form.Group controlId="formBasicEmail">
                 {/* <Form.Label style={{color:"black"}}>Group Name</Form.Label> */}
                 <Form.Control
@@ -108,15 +116,20 @@ const GroupList = () => {
                   required
                 />
               </Form.Group>
-
               <Modal.Footer>
-               {room.users.length>1?<button className="btn secondary btn-primary" type="submit">
-                  {" "}
-                  Create a group
-                </button>:<button disabled className="btn secondary btn-primary" type="submit">
-                  {" "}
-                  Create a group
-                </button>} 
+                {room.users.length > 1 ? (
+                  <button className="btn secondary btn-primary" type="submit">
+                    Create a group
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    className="btn secondary btn-primary"
+                    type="submit"
+                  >
+                    Create a group
+                  </button>
+                )}
 
                 <Button variant="secondary" onClick={handleClose}>
                   Close

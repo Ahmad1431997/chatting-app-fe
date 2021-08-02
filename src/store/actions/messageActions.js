@@ -7,6 +7,7 @@ export const createMessage = (message) => {
     payload: message,
   };
 };
+
 export const fetchMessages = () => {
   return async (dispatch) => {
     try {
