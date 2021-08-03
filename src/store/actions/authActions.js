@@ -23,7 +23,6 @@ export const signup = (userData, history) => {
 export const signin = (userData, history) => {
   return async (dispatch) => {
     try {
-      console.log("hi");
       const res = await instance.post("/signin", userData);
       dispatch(setUser(res.data.token, dispatch));
       history.push("/main");

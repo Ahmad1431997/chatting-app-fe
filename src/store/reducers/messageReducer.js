@@ -2,6 +2,7 @@ import {
   CREATE_MESSAGE,
   FETCH_MESSAGES,
   DELETE_MESSAGE,
+  DELETE_MESSAGE_FROM_BOTH,
 } from "../actions/types";
 
 const initialState = {
@@ -12,13 +13,21 @@ const initialState = {
 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case DELETE_MESSAGE:
+    case DELETE_MESSAGE_FROM_BOTH:
       const messageToKeep = state.messages.filter(
         (message) => message.id !== action.payload.messageId
       );
       return {
         ...state,
         messages: messageToKeep,
+      };
+    case DELETE_MESSAGE:
+      const messagesToKeep = state.messages.filter(
+        (message) => message.id !== action.payload.messageId
+      );
+      return {
+        ...state,
+        messages: messagesToKeep,
       };
     case CREATE_MESSAGE:
       return {

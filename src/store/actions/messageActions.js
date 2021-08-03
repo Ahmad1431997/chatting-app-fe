@@ -1,5 +1,10 @@
 import instance from "./instance";
-import { CREATE_MESSAGE, FETCH_MESSAGES, DELETE_MESSAGE } from "./types";
+import {
+  CREATE_MESSAGE,
+  FETCH_MESSAGES,
+  DELETE_MESSAGE,
+  DELETE_MESSAGE_FROM_BOTH,
+} from "./types";
 
 export const createMessage = (message) => {
   return {
@@ -34,5 +39,11 @@ export const deleteMessage = (messageId) => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+export const deleteMessageFromBoth = (messageId) => {
+  return {
+    type: DELETE_MESSAGE_FROM_BOTH,
+    payload: messageId,
   };
 };
