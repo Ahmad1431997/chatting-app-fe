@@ -14,15 +14,16 @@ import { HiOutlineLogout } from "@react-icons/all-files/hi/HiOutlineLogout";
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  // useEffect(() => {
+  //   dispatch(fetchProfiles());
+  // }, []);
   const [show, setShow] = useState(false);
   const [_profile, setProfile] = useState({
     image: "",
     status: "",
     gender: "male",
   });
-  useEffect(() => {
-    dispatch(fetchProfiles());
-  }, []);
+
   const user = useSelector((state) => state.user.user);
   const profiles = useSelector((state) => state.profiles.profiles);
 

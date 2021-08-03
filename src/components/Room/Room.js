@@ -1,5 +1,5 @@
 import React from "react";
-import InputEmoji from "react-input-emoji";
+
 import IoMdSend from "react-input-emoji";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -8,14 +8,29 @@ import ChatList from "../Chat/ChatList";
 import GroupList from "../Group/GroupList";
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
-import { createMessage } from "../../store/actions/messageActions";
+import {
+  createMessage,
+  deleteMessage,
+  fetchMessages,
+} from "../../store/actions/messageActions";
 import { Spinner } from "react-bootstrap";
 import Profile from "../Profile/Profile";
+import { RiDeleteBin2Line } from "@react-icons/all-files/ri/RiDeleteBin2Line";
+import { fetchUsers } from "../../store/actions/authActions";
+import { fetchRooms } from "../../store/actions/roomActions";
 
 function Room() {
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchRooms());
+
+  //   dispatch(fetchUsers());
+
+  //   dispatch(fetchMessages());
+  // }, []);
   const { roomId } = useParams();
-  console.log(roomId);
+
   const [text, setText] = useState("");
 
   const [socket, setSocket] = useState(null);
@@ -42,6 +57,10 @@ function Room() {
           .toString()
           .substr(0, 21)}  : \n\n\n ${text}`,
       });
+  };
+  const handleDelete = (messageId) => {
+    console.log(messageId);
+    dispatch(deleteMessage(messageId));
   };
 
   useEffect(() => {
@@ -103,7 +122,12 @@ function Room() {
               <>
                 {user.id === message.senderId ? (
                   <>
-                    <div className="body-send">{message.text}</div>
+                    <div className="body-send">
+                      {message.text} {message.id}
+                      <RiDeleteBin2Line
+                        onClick={() => handleDelete(message.id)}
+                      />
+                    </div>
                   </>
                 ) : (
                   <div className="body-recive">{message.text} </div>
