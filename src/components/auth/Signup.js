@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { signup } from "../../store/actions/authActions";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 
 const Signup = () => {
@@ -68,6 +69,13 @@ const Signup = () => {
         <button type="submit" className="btn btn-dark">
           Submit
          </button>
+         <p>
+        Already have an account ?
+   <Link className="link" to="/signin">
+        &nbsp; signin
+       </Link>
+       
+       </p>
   </form>
     </center>
  
