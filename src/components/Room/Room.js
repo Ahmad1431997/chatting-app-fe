@@ -9,6 +9,7 @@ import io from "socket.io-client";
 import {
   createMessage,
   deleteMessage,
+  deleteMessageFromBoth,
 } from "../../store/actions/messageActions";
 import { Spinner } from "react-bootstrap";
 import Profile from "../Profile/Profile";
@@ -27,7 +28,7 @@ function Room() {
   const el = useRef(null);
 
   const handleOnEnter = (text) => {
-    if (text !== "")
+    if (text !== "") {
       socket.emit("message", {
         senderId: user.id,
         image: "",
@@ -37,13 +38,30 @@ function Room() {
           .toString()
           .substr(0, 21)}  : \n\n\n ${text}`,
       });
+    }
   };
   const handleDelete = (messageId) => {
     dispatch(deleteMessage(messageId));
   };
+  const handleDeleteFromBoth = (messageId) => {
+    console.log(messageId);
+    if (messageId)
+      socket.emit("messageDelete", {
+        messageId,
+      });
+  };
 
   useEffect(() => {
     setSocket(io("localhost:8080"));
+  }, []);
+  useEffect(() => {
+    console.log("hi");
+    if (socket) {
+      socket.off("messageDelete");
+      socket.on("messageDelete", (messageId) => {
+        dispatch(deleteMessageFromBoth(messageId));
+      });
+    }
   }, []);
   useEffect(() => {
     if (socket) {
@@ -105,6 +123,9 @@ function Room() {
                       {message.text}
                       <RiDeleteBin2Line
                         onClick={() => handleDelete(message.id)}
+                      />
+                      <RiDeleteBin2Line
+                        onClick={() => handleDeleteFromBoth(message.id)}
                       />
                     </div>
                   </>
