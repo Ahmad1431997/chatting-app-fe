@@ -1,4 +1,4 @@
-import { Button, Modal, Form, FormGroup } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import GroupItem from "./GroupItem";
@@ -9,6 +9,7 @@ import { AiOutlineUsergroupAdd } from "@react-icons/all-files/ai/AiOutlineUsergr
 import Select from "react-select";
 
 const GroupList = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [room, setRoom] = useState({
     users: [],
@@ -17,9 +18,8 @@ const GroupList = () => {
   const rooms = useSelector((state) => state.rooms.rooms);
   const _users = useSelector((state) => state.user.allUsers);
   const user = useSelector((state) => state.user.user);
-  const otherUsers = _users.filter((_id) => _id.id !== user.id);
 
-  const dispatch = useDispatch();
+  const otherUsers = _users.filter((_id) => _id.id !== user.id);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -74,7 +74,6 @@ const GroupList = () => {
         <div className="chats">
           <div
             style={{
-              // position: "fixed",
               zIndex: 2,
               marginBottom: "7px",
               backgroundColor: "darkcyan",
@@ -109,12 +108,9 @@ const GroupList = () => {
                     className="basic-multi-select optselect"
                     classNamePrefix="select"
                     onChange={handleChange}
-
-                    //  value={selectedOptions}
                   />
                   <br />
                   <Form.Group controlId="formBasicEmail">
-                    {/* <Form.Label style={{color:"black"}}>Group Name</Form.Label> */}
                     <Form.Control
                       name="name"
                       type="text"

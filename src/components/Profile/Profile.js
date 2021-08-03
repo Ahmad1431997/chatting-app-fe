@@ -1,12 +1,9 @@
 import { Button, Modal, Form, Spinner } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "@react-icons/all-files/fi/FiSettings";
-import {
-  fetchProfiles,
-  updateProfile,
-} from "../../store/actions/profileActions";
+import { updateProfile } from "../../store/actions/profileActions";
 import { signout } from "../../store/actions/authActions";
 import { useHistory } from "react-router";
 import { HiOutlineLogout } from "@react-icons/all-files/hi/HiOutlineLogout";
@@ -14,23 +11,18 @@ import { HiOutlineLogout } from "@react-icons/all-files/hi/HiOutlineLogout";
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // useEffect(() => {
-  //   dispatch(fetchProfiles());
-  // }, []);
   const [show, setShow] = useState(false);
   const [_profile, setProfile] = useState({
     image: "",
     status: "",
     gender: "male",
   });
-
   const user = useSelector((state) => state.user.user);
   const profiles = useSelector((state) => state.profiles.profiles);
-
   const loadingprofile = useSelector((state) => state.profiles.loading);
 
   if (loadingprofile) return <Spinner />;
-  const profile = profiles.find((profile) => profile.userId == user.id);
+  const profile = profiles.find((profile) => profile.userId === user.id);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -61,6 +53,7 @@ const Profile = () => {
 
       <h2>{user.username}</h2>
       <img
+        alt="profileImage"
         style={{ width: "80px", height: "80px", borderRadius: "50%" }}
         src={
           profile.image

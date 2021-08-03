@@ -1,7 +1,5 @@
 import React from "react";
-
 import IoMdSend from "react-input-emoji";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router";
 import ChatList from "../Chat/ChatList";
@@ -11,40 +9,22 @@ import io from "socket.io-client";
 import {
   createMessage,
   deleteMessage,
-  fetchMessages,
 } from "../../store/actions/messageActions";
 import { Spinner } from "react-bootstrap";
 import Profile from "../Profile/Profile";
 import { RiDeleteBin2Line } from "@react-icons/all-files/ri/RiDeleteBin2Line";
-import { fetchUsers } from "../../store/actions/authActions";
-import { fetchRooms } from "../../store/actions/roomActions";
 
 function Room() {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchRooms());
-
-  //   dispatch(fetchUsers());
-
-  //   dispatch(fetchMessages());
-  // }, []);
   const { roomId } = useParams();
-
-  const [text, setText] = useState("");
 
   const [socket, setSocket] = useState(null);
   const messages = useSelector((state) => state.messages.messages);
   const loading = useSelector((state) => state.rooms.loading);
-
   const rooms = useSelector((state) => state.rooms.rooms);
   const users = useSelector((state) => state.user.allUsers);
-
   const user = useSelector((state) => state.user.user);
-
-  useEffect(() => {
-    setSocket(io("localhost:8080"));
-  }, []);
+  const el = useRef(null);
 
   const handleOnEnter = (text) => {
     if (text !== "")
@@ -59,10 +39,12 @@ function Room() {
       });
   };
   const handleDelete = (messageId) => {
-    console.log(messageId);
     dispatch(deleteMessage(messageId));
   };
 
+  useEffect(() => {
+    setSocket(io("localhost:8080"));
+  }, []);
   useEffect(() => {
     if (socket) {
       socket.off("message");
@@ -72,8 +54,6 @@ function Room() {
     }
   }, [socket]);
 
-  const el = useRef(null);
-
   useEffect(() => {
     el.current.scrollIntoView({ block: "end" });
   });
@@ -81,7 +61,6 @@ function Room() {
   const title = () => {
     if (loading) return <Spinner />;
     const certainRoom = rooms.find((room) => room.roomId === +roomId);
-
     if (certainRoom.usersId.length > 2) {
       const usersName = certainRoom.usersId
         .map((id) => users.find((user) => user.id === id))
@@ -92,7 +71,7 @@ function Room() {
             </>
           );
         });
-      //
+
       return (
         <>
           <h1>{certainRoom.name}</h1>
@@ -123,7 +102,7 @@ function Room() {
                 {user.id === message.senderId ? (
                   <>
                     <div className="body-send">
-                      {message.text} {message.id}
+                      {message.text}
                       <RiDeleteBin2Line
                         onClick={() => handleDelete(message.id)}
                       />
