@@ -1,13 +1,16 @@
 import React from "react";
 import InputEmoji from "react-input-emoji";
+import IoMdSend from "react-input-emoji";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router";
 import ChatList from "../Chat/ChatList";
 import GroupList from "../Group/GroupList";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 import { createMessage } from "../../store/actions/messageActions";
 import { Spinner } from "react-bootstrap";
+import Profile from "../Profile/Profile";
 
 function Room() {
   const dispatch = useDispatch();
@@ -29,8 +32,22 @@ function Room() {
   }, []);
 
   const handleOnEnter = (text) => {
-    setText(`${user.username} : ${text}`);
+    if (text !== "")
+      socket.emit("message", {
+        senderId: user.id,
+        image: "",
+        roomId: +roomId,
+
+        text: ` ${user.username} |  ${new Date(Date.now())
+          .toString()
+          .substr(0, 21)}  : \n\n\n ${text}`,
+      });
   };
+
+  //  const msgText = () => {
+
+  //   return(<div>{user.username}</div>)
+  //  }
 
   useEffect(() => {
     if (socket) {
@@ -39,19 +56,14 @@ function Room() {
         dispatch(createMessage(message));
       });
     }
+    // window.scrollTo(0, 0)
   }, [socket]);
 
-  useEffect(() => {
-    if (socket && text !== null) {
-      socket.emit("message", {
-        senderId: user.id,
+  const el = useRef(null);
 
-        image: "",
-        text: text,
-        roomId: +roomId,
-      });
-    }
-  }, [text]);
+  useEffect(() => {
+    el.current.scrollIntoView({ block: "end" });
+  });
 
   const title = () => {
     if (loading) return <Spinner />;
@@ -70,12 +82,13 @@ function Room() {
   if (!_messages) return <Redirect to="/main" />;
 
   return (
-    <>
+    <div>
+      <Profile />
       <ChatList />
       <GroupList />
-      <div className="room-cont">
+      <div className="room-cont" id={"el"} ref={el}>
         <div className="room-head">{title()}</div>
-        <div style={{ color: "black" }}>
+
           {_messages
             ? _messages.map((message) => (
                 <>
@@ -89,17 +102,21 @@ function Room() {
                 </>
               ))
             : ""}
-        </div>
 
         <div className="footer">
-          <InputEmoji
-            cleanOnEnter
-            onEnter={handleOnEnter}
-            placeholder="Type a message"
-          />
-        </div>
+        <IoMdSend
+          cleanOnEnter
+          onEnter={handleOnEnter}
+          placeholder="Type a message..."
+          style={{
+            width: "40px",
+            height: "30px",
+          }}
+        />
       </div>
-    </>
+     
+    </div>
+    </div>
   );
 }
 

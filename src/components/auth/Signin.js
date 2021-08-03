@@ -52,10 +52,11 @@ const Signin = () => {
          Submit
         </button>
         <p>
+        don't have an account ?
    <Link className="link" to="/signup">
-         signup
+        &nbsp;  signup
        </Link>{" "}
-       if you don't have an account
+      
        </p>
    </form>
    

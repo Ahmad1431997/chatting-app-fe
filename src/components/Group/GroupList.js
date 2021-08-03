@@ -1,10 +1,11 @@
+
 import { Button, Modal, Form, FormGroup } from "react-bootstrap";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import GroupItem from "./GroupItem";
 import { createRoom } from "../../store/actions/roomActions";
 import { useDispatch } from "react-redux";
-import { BiCommentAdd } from "@react-icons/all-files/bi/BiCommentAdd";
+import { AiOutlineUsergroupAdd } from "@react-icons/all-files/ai/AiOutlineUsergroupAdd";
 
 import Select from "react-select";
 
@@ -58,32 +59,42 @@ const GroupList = () => {
   });
 
   return (
-    <div className="groups">
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 2,
-          marginBottom: "7px",
-          backgroundColor: "darkcyan",
-        }}
-      >
-        <span style={{ color: "white" }}>
-          <BiCommentAdd color="black" size="2em" onClick={handleShow} />
+    <div className="chats-cont">
+  <div style={{ marginBottom: 0, marginLeft: "20px" }}>
+
+
+        <span style={{ color: "white",marginRight: "30%" }}>
+          <AiOutlineUsergroupAdd color="black" size="2em" onClick={handleShow} />
+          &nbsp; new group
         </span>
-        Your Groups
       </div>
-      <br />
+     
+      <div>
+        <div className="chats">
+          <div
+            style={{
+              // position: "fixed",
+              zIndex: 2,
+              marginBottom: "7px",
+              backgroundColor: "darkcyan",
+            }}
+          ></div>
+
+          <br />
 
       {groupList}
 
       <>
         <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title style={{ color: "black" }}>New Group</Modal.Title>
+          <Modal.Header style={{backgroundColor: "#353656" }}closeButton>
+            <Modal.Title>New Group</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Label style={{ color: "black" }}>Select members</Form.Label>
+            <Form 
+            style={{ backgroundColor: "#353656", margin:"auto", border:"solid 3px black" }}
+
+            onSubmit={handleSubmit}>
+              <Form.Label style={{ fontWeight:"bold" }}>Select members</Form.Label>
               <Select
                 isMulti
                 name="users"
@@ -124,13 +135,15 @@ const GroupList = () => {
                 )}
 
                 <Button variant="secondary" onClick={handleClose}>
-                  Close
+                Cancel
                 </Button>
               </Modal.Footer>
             </Form>
           </Modal.Body>
         </Modal>
       </>
+    </div>
+    </div>
     </div>
   );
 };

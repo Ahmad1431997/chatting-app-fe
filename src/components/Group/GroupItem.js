@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 const GroupItem = ({ _room }) => {
   return (
     <div>
-      <Link to={`/rooms/${_room.roomId}`}>
+      <Link className="txtlink" to={`/rooms/${_room.roomId}`}>
         <div
           className="card mb-3"
           style={{
-            maxWidth: "150px",
+            maxWidth: "270px",
             maxHeight: "100px",
-            backgroundColor: "darkgray",
+            backgroundColor: "#edf2fb",
           }}
         >
           <div className="row no-gutters">
@@ -19,7 +19,7 @@ const GroupItem = ({ _room }) => {
               <img
                 className="card-img"
                 src={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtPyxGKybSpG2tEyeHPaIyoAvIn3dUbJGpWJ1pqe_-ROdV14KAty1F6C6Oby47qYr5ibg&usqp=CAU"
+                  "https://www.kindpng.com/picc/m/263-2637306_society-icon-png-transparent-png.png"
                 }
                 alt={_room.name}
               />

@@ -2,6 +2,7 @@ import { UPDATE_PROFILE, FETCH_PROFILE } from "../actions/types";
 
 const initialState = {
   profiles: [],
+  loading:true
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profiles: action.payload,
+        loading:false
       };
 
     case UPDATE_PROFILE:
