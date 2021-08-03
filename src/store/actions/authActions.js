@@ -2,13 +2,16 @@ import { FETCH_USERS, SET_USER } from "./types";
 
 import instance from "./instance";
 import decode from "jwt-decode";
+import { fetchMessages } from "./messageActions";
+import { fetchRooms } from "./roomActions";
+import { fetchProfiles } from "./profileActions";
 
 //signup action
 export const signup = (userData, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signup", userData);
-      dispatch(setUser(res.data.token));
+      dispatch(setUser(res.data.token, dispatch));
       history.push("/main");
     } catch (error) {
       console.log(error.message);
@@ -22,7 +25,7 @@ export const signin = (userData, history) => {
     try {
       console.log("hi");
       const res = await instance.post("/signin", userData);
-      dispatch(setUser(res.data.token));
+      dispatch(setUser(res.data.token, dispatch));
       history.push("/main");
     } catch (error) {
       console.log(error.message);
@@ -35,11 +38,16 @@ export const signout = (history) => {
   return setUser();
 };
 
-const setUser = (token) => {
+const setUser = (token, dispatch) => {
   if (token) {
     console.log(token);
     localStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    dispatch(fetchUsers());
+    dispatch(fetchMessages());
+    dispatch(fetchRooms());
+    dispatch(fetchProfiles());
+
     return {
       type: SET_USER,
       payload: decode(token),
@@ -54,7 +62,7 @@ const setUser = (token) => {
   }
 };
 
-export const checkForToken = () => {
+export const checkForToken = () => async (dispatch) => {
   const token = localStorage.getItem("myToken");
 
   if (token) {
@@ -63,10 +71,11 @@ export const checkForToken = () => {
     const user = decode(token);
 
     if (user.exp > currentTime) {
-      return setUser(token);
+      dispatch(setUser(token, dispatch));
+      return;
     }
   }
-  return setUser();
+  dispatch(setUser());
 };
 
 export const fetchUsers = () => {

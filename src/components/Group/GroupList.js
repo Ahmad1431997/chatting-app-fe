@@ -1,4 +1,3 @@
-
 import { Button, Modal, Form, FormGroup } from "react-bootstrap";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -60,15 +59,17 @@ const GroupList = () => {
 
   return (
     <div className="chats-cont">
-  <div style={{ marginBottom: 0, marginLeft: "20px" }}>
-
-
-        <span style={{ color: "white",marginRight: "30%" }}>
-          <AiOutlineUsergroupAdd color="black" size="2em" onClick={handleShow} />
+      <div style={{ marginBottom: 0, marginLeft: "20px" }}>
+        <span style={{ color: "white", marginRight: "30%" }}>
+          <AiOutlineUsergroupAdd
+            color="black"
+            size="2em"
+            onClick={handleShow}
+          />
           &nbsp; new group
         </span>
       </div>
-     
+
       <div>
         <div className="chats">
           <div
@@ -82,68 +83,77 @@ const GroupList = () => {
 
           <br />
 
-      {groupList}
+          {groupList}
 
-      <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header style={{backgroundColor: "#353656" }}closeButton>
-            <Modal.Title>New Group</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form 
-            style={{ backgroundColor: "#353656", margin:"auto", border:"solid 3px black" }}
+          <>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header style={{ backgroundColor: "#353656" }} closeButton>
+                <Modal.Title>New Group</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form
+                  style={{
+                    backgroundColor: "#353656",
+                    margin: "auto",
+                    border: "solid 3px black",
+                  }}
+                  onSubmit={handleSubmit}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Select members
+                  </Form.Label>
+                  <Select
+                    isMulti
+                    name="users"
+                    options={TheListOfUsers}
+                    className="basic-multi-select optselect"
+                    classNamePrefix="select"
+                    onChange={handleChange}
 
-            onSubmit={handleSubmit}>
-              <Form.Label style={{ fontWeight:"bold" }}>Select members</Form.Label>
-              <Select
-                isMulti
-                name="users"
-                options={TheListOfUsers}
-                className="basic-multi-select optselect"
-                classNamePrefix="select"
-                onChange={handleChange}
+                    //  value={selectedOptions}
+                  />
+                  <br />
+                  <Form.Group controlId="formBasicEmail">
+                    {/* <Form.Label style={{color:"black"}}>Group Name</Form.Label> */}
+                    <Form.Control
+                      name="name"
+                      type="text"
+                      onChange={handleInputChange}
+                      placeholder="group name"
+                      required
+                    />
+                  </Form.Group>
 
-                //  value={selectedOptions}
-              />
-              <br />
-              <Form.Group controlId="formBasicEmail">
-                {/* <Form.Label style={{color:"black"}}>Group Name</Form.Label> */}
-                <Form.Control
-                  name="name"
-                  type="text"
-                  onChange={handleInputChange}
-                  placeholder="group name"
-                  required
-                />
-              </Form.Group>
+                  <Modal.Footer>
+                    {room.users.length > 1 ? (
+                      <button
+                        className="btn secondary btn-primary"
+                        type="submit"
+                      >
+                        {" "}
+                        Create a group
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="btn secondary btn-primary"
+                        type="submit"
+                      >
+                        {" "}
+                        Create a group
+                      </button>
+                    )}
 
-              <Modal.Footer>
-                {room.users.length > 1 ? (
-                  <button className="btn secondary btn-primary" type="submit">
-                    {" "}
-                    Create a group
-                  </button>
-                ) : (
-                  <button
-                    disabled
-                    className="btn secondary btn-primary"
-                    type="submit"
-                  >
-                    {" "}
-                    Create a group
-                  </button>
-                )}
-
-                <Button variant="secondary" onClick={handleClose}>
-                Cancel
-                </Button>
-              </Modal.Footer>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      </>
-    </div>
-    </div>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                  </Modal.Footer>
+                </Form>
+              </Modal.Body>
+            </Modal>
+          </>
+        </div>
+      </div>
     </div>
   );
 };
