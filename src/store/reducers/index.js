@@ -16,6 +16,6 @@ store.dispatch(checkForToken());
 store.dispatch(fetchUsers());
 store.dispatch(fetchMessages());
 store.dispatch(fetchRooms());
-store.dispatch(fetchProfiles());
+//store.dispatch(fetchProfiles());
 
 export default store;

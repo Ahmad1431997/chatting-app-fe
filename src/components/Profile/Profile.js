@@ -1,31 +1,34 @@
 import { Button, Modal, Form, Spinner } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "@react-icons/all-files/fi/FiSettings";
-import { updateProfile } from "../../store/actions/profileActions";
+import {
+  fetchProfiles,
+  updateProfile,
+} from "../../store/actions/profileActions";
 import { signout } from "../../store/actions/authActions";
 import { useHistory } from "react-router";
 import { HiOutlineLogout } from "@react-icons/all-files/hi/HiOutlineLogout";
 
-
 const Profile = () => {
-  const user = useSelector((state) => state.user.user);
-  const profiles = useSelector((state) => state.profiles.profiles);
-  const loadingprofile = useSelector((state) => state.profiles.loading);
-  
-
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const [_profile, setProfile] = useState({
     image: "",
     status: "",
     gender: "male",
   });
+  useEffect(() => {
+    dispatch(fetchProfiles());
+  }, []);
+  const user = useSelector((state) => state.user.user);
+  const profiles = useSelector((state) => state.profiles.profiles);
 
-  const dispatch = useDispatch();
-  const history = useHistory()
+  const loadingprofile = useSelector((state) => state.profiles.loading);
 
-   if(loadingprofile) return <Spinner/>
+  if (loadingprofile) return <Spinner />;
   const profile = profiles.find((profile) => profile.userId == user.id);
 
   const handleClose = () => setShow(false);
@@ -50,30 +53,38 @@ const Profile = () => {
   };
   return (
     <div className="profile-cont">
-      <span style={{ color: "white",marginRight: "40%" }}>
+      <span style={{ color: "white", marginRight: "40%" }}>
         <FiSettings color="black" size="2em" onClick={handleShow} />
-       &nbsp; profile setting
+        &nbsp; profile setting
       </span>
 
-
       <h2>{user.username}</h2>
-      <img style={{width:"80px", height:"80px", borderRadius:"50%"}}
-       src={profile.image ? profile.image :"https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"}/>
-       
-      <h5>{profile ? profile.gendar : ""}</h5>
+      <img
+        style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+        src={
+          profile.image
+            ? profile.image
+            : "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
+        }
+      />
+
+      <h5>{profile ? profile.gender : ""}</h5>
       <h5>{profile ? profile.status : ""}</h5>
       <>
         <Modal show={show} onHide={handleClose}>
-          <Modal.Header style={{backgroundColor: "#353656" }} closeButton>
-            <Modal.Title >Profile Setting</Modal.Title>
+          <Modal.Header style={{ backgroundColor: "#353656" }} closeButton>
+            <Modal.Title>Profile Setting</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form
-            style={{ backgroundColor: "#353656", margin:"auto", border:"solid 3px black" }}
-             onSubmit={handleSubmit}>
-              <Form.Label >
-                gendar
-              </Form.Label>
+              style={{
+                backgroundColor: "#353656",
+                margin: "auto",
+                border: "solid 3px black",
+              }}
+              onSubmit={handleSubmit}
+            >
+              <Form.Label>gendar</Form.Label>
 
               <Form.Control
                 name="gendar"
@@ -88,10 +99,8 @@ const Profile = () => {
                 <option value="female"> female</option>
               </Form.Control>
               <Form.Group controlId="formBasicEmail">
-                <br/>
-              <Form.Label >
-                status
-              </Form.Label>
+                <br />
+                <Form.Label>status</Form.Label>
                 <Form.Control
                   name="status"
                   type="text"
@@ -100,7 +109,7 @@ const Profile = () => {
                 />
               </Form.Group>
               <Form.Group controlId="formFile" className="mb-3">
-              <br/>
+                <br />
                 <Form.Label>your picture</Form.Label>
                 <Form.Control onChange={handleImage} name="image" type="file" />
               </Form.Group>
@@ -117,11 +126,16 @@ const Profile = () => {
             </Form>
           </Modal.Body>
           <center>
-            <button className="btn btn-danger"
-            style={{width:"80px"}}
-            onClick={() => { dispatch(signout(history)) }} ><HiOutlineLogout/>  &nbsp;  Logout </button>
-            </center>
-
+            <button
+              className="btn btn-danger"
+              style={{ width: "80px" }}
+              onClick={() => {
+                dispatch(signout(history));
+              }}
+            >
+              <HiOutlineLogout /> &nbsp; Logout{" "}
+            </button>
+          </center>
         </Modal>
       </>
     </div>

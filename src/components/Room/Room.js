@@ -44,11 +44,6 @@ function Room() {
       });
   };
 
-  //  const msgText = () => {
-
-  //   return(<div>{user.username}</div>)
-  //  }
-
   useEffect(() => {
     if (socket) {
       socket.off("message");
@@ -56,7 +51,6 @@ function Room() {
         dispatch(createMessage(message));
       });
     }
-    // window.scrollTo(0, 0)
   }, [socket]);
 
   const el = useRef(null);
@@ -70,7 +64,22 @@ function Room() {
     const certainRoom = rooms.find((room) => room.roomId === +roomId);
 
     if (certainRoom.usersId.length > 2) {
-      return certainRoom.name;
+      const usersName = certainRoom.usersId
+        .map((id) => users.find((user) => user.id === id))
+        .map((name) => {
+          return (
+            <>
+              <b>{name.username} &nbsp;</b>
+            </>
+          );
+        });
+      //
+      return (
+        <>
+          <h1>{certainRoom.name}</h1>
+          Group members: {usersName}
+        </>
+      );
     } else {
       return users.find(
         (_user) =>
@@ -89,33 +98,32 @@ function Room() {
       <div className="room-cont" id={"el"} ref={el}>
         <div className="room-head">{title()}</div>
 
-          {_messages
-            ? _messages.map((message) => (
-                <>
-                  {user.id === message.senderId ? (
-                    <>
-                      <div className="body-send">{message.text}</div>
-                    </>
-                  ) : (
-                    <div className="body-recive">{message.text} </div>
-                  )}
-                </>
-              ))
-            : ""}
+        {_messages
+          ? _messages.map((message) => (
+              <>
+                {user.id === message.senderId ? (
+                  <>
+                    <div className="body-send">{message.text}</div>
+                  </>
+                ) : (
+                  <div className="body-recive">{message.text} </div>
+                )}
+              </>
+            ))
+          : ""}
 
         <div className="footer">
-        <IoMdSend
-          cleanOnEnter
-          onEnter={handleOnEnter}
-          placeholder="Type a message..."
-          style={{
-            width: "40px",
-            height: "30px",
-          }}
-        />
+          <IoMdSend
+            cleanOnEnter
+            onEnter={handleOnEnter}
+            placeholder="Type a message..."
+            style={{
+              width: "40px",
+              height: "30px",
+            }}
+          />
+        </div>
       </div>
-     
-    </div>
     </div>
   );
 }

@@ -1,11 +1,11 @@
-
 body {
   background-color: #353656 !important ;
   /* background-image: url("https://wallpaperaccess.com/full/381735.jpg"); */
   /* background-size: cover;
   background-repeat: no-repeat; */
   color: white !important;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif !important;
 }
 .in {
   margin: 10px !important;
@@ -34,7 +34,6 @@ span {
   width: 0;
 }
 
-
 .optselect {
   color: black;
   font-weight: bold;
@@ -51,12 +50,11 @@ span {
   /* height: 100% !important; */
 }
 .room-head {
-  position: fixed;
   z-index: 1;
   background-color: #353656;
   min-height: 50px;
   /* text-align: center; */
-  padding-left: 33%;
+  padding-left: 30%;
   width: 100%;
 }
 .footer {
@@ -66,7 +64,6 @@ span {
   max-height: 40px;
   margin-top: 80%;
 }
-
 
 form {
   max-width: 400px;
@@ -121,30 +118,24 @@ form {
 
 /* edeting */
 
-
-.txtlink{
+.txtlink {
   text-decoration: none;
-  color: black ;
+  color: black;
   font-weight: bold;
-font-size: 20px;
-  text-align:start;
+  font-size: 20px;
+  text-align: start;
 }
 
-
-
-
-.chats-cont{
-  
+.chats-cont {
   /* border: double 3px cyan; */
 
   border-color: #003566;
-border-style: ridge;
-border-top:none;
-border-bottom:none;
+  border-style: ridge;
+  border-top: none;
+  border-bottom: none;
   width: 20%;
   margin-left: 2%;
   margin-top: 0.25%;
-
 }
 
 .profile-cont {
@@ -152,8 +143,8 @@ border-bottom:none;
 
   border-color: #003566;
   border-style: ridge;
-  border-top:none;
-  border-bottom:none;
+  border-top: none;
+  border-bottom: none;
 
   width: 20%;
   margin-left: 2%;
@@ -165,11 +156,10 @@ border-bottom:none;
   flex-direction: column;
 }
 
-
 .chats {
   /* border: double 3px cyan; */
   /* width: 20%; */
-  
+
   margin-left: 2%;
   margin-top: 2%;
   max-height: 190px;
@@ -178,7 +168,5 @@ border-bottom:none;
   display: flex;
   flex-direction: column;
 }
-
-
 
 /**********************/
