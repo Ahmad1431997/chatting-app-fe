@@ -4,6 +4,7 @@ import {
   FETCH_MESSAGES,
   DELETE_MESSAGE,
   DELETE_MESSAGE_FROM_BOTH,
+  UPDATE_MESSAGE,
 } from "./types";
 
 export const createMessage = (message) => {
@@ -45,5 +46,13 @@ export const deleteMessageFromBoth = (messageId) => {
   return {
     type: DELETE_MESSAGE_FROM_BOTH,
     payload: messageId,
+  };
+};
+
+
+export const updateMessage = (updatedMessage) => {
+  return {
+    type: UPDATE_MESSAGE,
+    payload: updatedMessage,
   };
 };

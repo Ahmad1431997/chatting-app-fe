@@ -20,9 +20,9 @@ const Signup = () => {
     <MainBar/>
     <center>
       <div className="home">
-        <h1 style={{
+        <h2 style={{
           marginLeft:"160px"
-        }}> Made With Love By Lightning Team⚡ </h1>
+        }}> Made With Love By The Lightning Team⚡ </h2>
         <div>
                 <figure>
                     <img

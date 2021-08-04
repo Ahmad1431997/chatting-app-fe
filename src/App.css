@@ -57,11 +57,10 @@ span {
   text-shadow: 1px 1px white;
   background-color: #35365652;
   min-height: 50px;
-  /* text-align: center; */
-  padding-left: 5%;
   width: 67%;
   font-size: 24pt;
   position: fixed;
+  text-align: center;
 }
 .footer {
   position: absolute;

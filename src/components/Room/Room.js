@@ -10,17 +10,24 @@ import {
   createMessage,
   deleteMessage,
   deleteMessageFromBoth,
+  updateMessage,
 } from "../../store/actions/messageActions";
 import { Spinner } from "react-bootstrap";
 import Profile from "../Profile/Profile";
 import { RiDeleteBin2Line } from "@react-icons/all-files/ri/RiDeleteBin2Line";
+import { GrEdit } from "@react-icons/all-files/gr/GrEdit";
+
 import { Link } from "react-router-dom";
+import { Button, Modal, Form } from "react-bootstrap";
 
 function Room() {
   const dispatch = useDispatch();
   const { roomId } = useParams();
 
   const [socket, setSocket] = useState(null);
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState(null);
+
   const messages = useSelector((state) => state.messages.messages);
   const loading = useSelector((state) => state.rooms.loading);
   const rooms = useSelector((state) => state.rooms.rooms);
@@ -28,8 +35,11 @@ function Room() {
   const user = useSelector((state) => state.user.user);
   const el = useRef(null);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleOnEnter = (text) => {
-    if (text !== "") {
+    if (text) {
       socket.emit("message", {
         senderId: user.id,
         image: "",
@@ -41,9 +51,31 @@ function Room() {
       });
     }
   };
+
+  const handleInputChange = (event) => {
+    setMsg({
+      ...msg,
+      text: ` ${user.username} |  ${new Date(Date.now())
+        .toString()
+        .substr(0, 21)}  : \n\n\n ${event.target.value}`,
+    });
+  };
+  const handleUpdate = (event, message) => {
+    event.preventDefault();
+
+    handleClose();
+    message = { ...message, ...msg };
+
+    if (message)
+      socket.emit("messageUpdate", {
+        message,
+      });
+  };
+
   const handleDelete = (messageId) => {
     dispatch(deleteMessage(messageId));
   };
+
   const handleDeleteFromBoth = (messageId) => {
     if (messageId)
       socket.emit("messageDelete", {
@@ -59,13 +91,18 @@ function Room() {
     if (socket) {
       socket.off("messageDelete");
       socket.on("messageDelete", (messageId) => {
-        console.log(messageId);
-
         dispatch(deleteMessageFromBoth(messageId));
       });
+
       socket.off("message");
       socket.on("message", ({ message }) => {
         dispatch(createMessage(message));
+      });
+
+      socket.off("messageUpdate");
+      socket.on("messageUpdate", (message) => {
+        console.log(message);
+        dispatch(updateMessage(message));
       });
     }
   }, [socket]);
@@ -111,19 +148,21 @@ function Room() {
       <GroupList />
       <div className="room-cont" id={"el"} ref={el}>
         <div className="room-head">
-          {title()} 
-          
+          {title()}
+
           <Link
-
-style={{color:"black", position:"absolute", right:"15px", fontSize:"28px", textDecorationLine:"none"}}
-          
-          to="/main" > 
-          ⬅ Go back</Link>
-
+            style={{
+              color: "darkcyan",
+              position: "absolute",
+              right: "15px",
+              fontSize: "28px",
+              textDecorationLine: "none",
+            }}
+            to="/main"
+          >
+            ⬅ 
+          </Link>
         </div>
-               
-
-
 
         {_messages
           ? _messages.map((message) => (
@@ -132,12 +171,63 @@ style={{color:"black", position:"absolute", right:"15px", fontSize:"28px", textD
                   <>
                     <div className="body-send">
                       {message.text}
-                      <RiDeleteBin2Line
-                        onClick={() => handleDelete(message.id)}
-                      />
-                      <RiDeleteBin2Line
-                        onClick={() => handleDeleteFromBoth(message.id)}
-                      />
+
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header
+                          style={{ backgroundColor: "#353656" }}
+                          closeButton
+                        >
+                          <Modal.Title>update message</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Form
+                            style={{
+                              backgroundColor: "#353656",
+                              margin: "auto",
+                              border: "solid 3px black",
+                            }}
+                            onSubmit={(event) => handleUpdate(event, message)}
+                          >
+                            <br />
+                            <Form.Group controlId="formBasicEmail">
+                              <Form.Control
+                                name="name"
+                                type="text"
+                                onChange={handleInputChange}
+                                placeholder="edited message"
+                                required
+                              />
+                            </Form.Group>
+
+                            <Modal.Footer style={{ justifyContent: "center" }}>
+                              <Button type="submit" variant="success">
+                                edit
+                              </Button>
+
+                              <Button
+                                type="submit"
+                                variant="danger"
+                                onClick={() => handleDelete(message.id)}
+                              >
+                                delete for me
+                              </Button>
+
+                              <Button
+                                type="submit"
+                                variant="danger"
+                                onClick={() => handleDeleteFromBoth(message.id)}
+                              >
+                                delete for all
+                              </Button>
+
+                              <Button variant="secondary" onClick={handleClose}>
+                                Cancel
+                              </Button>
+                            </Modal.Footer>
+                          </Form>
+                        </Modal.Body>
+                      </Modal>
+                      <GrEdit onClick={() => handleShow()} />
                     </div>
                   </>
                 ) : (
