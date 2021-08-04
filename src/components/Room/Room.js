@@ -14,6 +14,7 @@ import {
 import { Spinner } from "react-bootstrap";
 import Profile from "../Profile/Profile";
 import { RiDeleteBin2Line } from "@react-icons/all-files/ri/RiDeleteBin2Line";
+import { Link } from "react-router-dom";
 
 function Room() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function Room() {
 
         text: ` ${user.username} |  ${new Date(Date.now())
           .toString()
-          .substr(0, 21)}  : \n\n\n ${text}`,
+          .substr(0, 21)}  : \n\n\n    ${text}`,
       });
     }
   };
@@ -72,10 +73,6 @@ function Room() {
   useEffect(() => {
     el.current.scrollIntoView({ block: "end" });
   });
-
- 
-  
- 
 
   const title = () => {
     if (loading) return <Spinner />;
@@ -113,7 +110,20 @@ function Room() {
       <ChatList />
       <GroupList />
       <div className="room-cont" id={"el"} ref={el}>
-        <div className="room-head">{title()}</div>
+        <div className="room-head">
+          {title()} 
+          
+          <Link
+
+style={{color:"black", position:"absolute", right:"15px", fontSize:"28px", textDecorationLine:"none"}}
+          
+          to="/main" > 
+          ⬅ Go back</Link>
+
+        </div>
+               
+
+
 
         {_messages
           ? _messages.map((message) => (
@@ -136,20 +146,14 @@ function Room() {
               </>
             ))
           : ""}
-
-     
-       
       </div>
       <span className="footer">
-        
-
-          <IoMdSend
+        <IoMdSend
           cleanOnEnter
           onEnter={handleOnEnter}
           placeholder="Type a message..."
-          
-          />
-          </span>
+        />
+      </span>
     </div>
   );
 }

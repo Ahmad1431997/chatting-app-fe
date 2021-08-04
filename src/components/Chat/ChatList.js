@@ -45,8 +45,8 @@ const ChatList = () => {
   return (
     <div className="chats-cont">
       <div style={{ marginBottom: 0, marginLeft: "20px" }}>
-        <span style={{ color: "white", marginRight: "30%" }}>
-          <AiOutlineUserAdd color="black" size="2em" onClick={handleShow} />
+        <span style={{ color: "darkcyan", marginRight: "30%" }}>
+          <AiOutlineUserAdd color="white" size="2em" onClick={handleShow} />
           &nbsp; new chat
         </span>
       </div>
@@ -59,13 +59,13 @@ const ChatList = () => {
 
           <>
             <Modal show={show} onHide={handleClose}>
-              <Modal.Header style={{ backgroundColor: "#353656" }} closeButton>
+              <Modal.Header style={{ backgroundColor: "#012a4a" }} closeButton>
                 <Modal.Title>New Chat</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form
                   style={{
-                    backgroundColor: "#353656",
+                    backgroundColor: "#012a4a",
                     margin: "auto",
                     border: "solid 3px black",
                   }}
@@ -98,7 +98,9 @@ const ChatList = () => {
                   </Form.Control>
 
                   <Modal.Footer>
-                    <button className="btn secondary btn-primary" type="submit">
+                    <button 
+                    style={{backgroundColor:"darkcyan"}}
+                    className="btn secondary btn-primary" type="submit">
                       Start a Chat
                     </button>
 

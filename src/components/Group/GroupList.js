@@ -60,9 +60,9 @@ const GroupList = () => {
   return (
     <div className="chats-cont">
       <div style={{ marginBottom: 0, marginLeft: "20px" }}>
-        <span style={{ color: "white", marginRight: "30%" }}>
+        <span style={{ color: "darkcyan", marginRight: "30%" }}>
           <AiOutlineUsergroupAdd
-            color="black"
+            color="white"
             size="2em"
             onClick={handleShow}
           />
@@ -86,13 +86,13 @@ const GroupList = () => {
 
           <>
             <Modal show={show} onHide={handleClose}>
-              <Modal.Header style={{ backgroundColor: "#353656" }} closeButton>
+              <Modal.Header style={{ backgroundColor: "#012a4a" }} closeButton>
                 <Modal.Title>New Group</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form
                   style={{
-                    backgroundColor: "#353656",
+                    backgroundColor: "#012a4a",
                     margin: "auto",
                     border: "solid 3px black",
                   }}
@@ -123,6 +123,7 @@ const GroupList = () => {
                   <Modal.Footer>
                     {room.users.length > 1 ? (
                       <button
+                      style={{backgroundColor:"darkcyan"}}
                         className="btn secondary btn-primary"
                         type="submit"
                       >
@@ -131,6 +132,7 @@ const GroupList = () => {
                       </button>
                     ) : (
                       <button
+                      style={{backgroundColor:"darkcyan"}}
                         disabled
                         className="btn secondary btn-primary"
                         type="submit"
