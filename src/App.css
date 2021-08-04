@@ -1,8 +1,5 @@
 body {
-  background-color: #353656 !important ;
-  /* background-image: url("https://wallpaperaccess.com/full/381735.jpg"); */
-  /* background-size: cover;
-  background-repeat: no-repeat; */
+  background-color: #012a4a !important ;
   color: white !important;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif !important;
@@ -22,6 +19,10 @@ body {
 }
 .form {
   margin-left: 50%;
+  position: absolute;
+  top: 38%;
+  right: 10%;
+  box-shadow: 1px 1px 15px darkcyan;
 }
 span {
   color: red;
@@ -39,7 +40,6 @@ span {
   font-weight: bold;
 }
 .room-cont {
-  
   background-image: url("https://images-ext-1.discordapp.net/external/BUqzOfVJD1waKp4wgSyYpyYJ5PKwwpdw4NosUNyhtig/https/thumbs.dreamstime.com/b/seamless-mobile-apps-pattern-web-page-64452032.jpg?width=468&height=468");
   position: absolute;
   left: 28%;
@@ -50,12 +50,11 @@ span {
   overflow-y: scroll;
   scroll-margin-bottom: 100px;
   box-shadow: 3px 3px 15px #eee;
-
-  /* height: 100% !important; */
 }
 .room-head {
   z-index: 1;
-  color: #353656;
+  color: darkcyan;
+  text-shadow: 1px 1px white;
   background-color: #35365652;
   min-height: 50px;
   /* text-align: center; */
@@ -63,14 +62,18 @@ span {
   width: 67%;
   font-size: 24pt;
   position: fixed;
-
 }
 .footer {
-  position: fixed;
+  position: absolute;
   width: 68% !important;
- margin-left:27.5%;
- margin-top: 0.65%;
+  left: 27.5%;
+  bottom: 3%;
+}
 
+.slider-cont {
+  position: absolute;
+  right: 15%;
+  bottom: 18%;
 }
 
 form {
@@ -80,7 +83,7 @@ form {
   box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
 }
 
-.body-recive {
+.body-send {
   margin-bottom: 59.59px;
 
   position: relative;
@@ -102,7 +105,7 @@ form {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-.body-send {
+.body-recive {
   position: relative;
   margin-top: 2.5%;
   margin-bottom: 59.59px;
@@ -135,11 +138,12 @@ form {
   font-size: 20px;
   text-align: start;
 }
+.txtlink:hover {
+  color: darkcyan;
+}
 
 .chats-cont {
-  /* border: double 3px cyan; */
-
-  border-color: #003566;
+  border-color: darkcyan;
   border-style: ridge;
   border-top: none;
   border-bottom: none;
@@ -148,28 +152,9 @@ form {
   margin-top: 0.25%;
 }
 
-.profile-cont {
-  /* border: double 3px cyan; */
 
-  border-color: #003566;
-  border-style: ridge;
-  border-top: none;
-  border-bottom: none;
-
-  width: 20%;
-  margin-left: 2%;
-  margin-top: 2%;
-  max-height: 250px;
-  /* overflow-y: scroll; */
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
 
 .chats {
-  /* border: double 3px cyan; */
-  /* width: 20%; */
-
   margin-left: 2%;
   margin-top: 2%;
   max-height: 190px;
@@ -180,3 +165,235 @@ form {
 }
 
 /**********************/
+
+.auto-slider {
+  position: relative;
+  box-sizing: content-box;
+  display: inline-block;
+  padding: 10px 10px 20px;
+  background: #fff;
+  max-width: 720px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 4px;
+  /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4); */
+  height: 415px !important;
+  box-shadow: 10px 10px 30px darkcyan;
+}
+
+div#slider {
+  overflow: hidden;
+}
+div#slider figure img {
+  width: 20%;
+  float: left;
+}
+div#slider figure {
+  position: relative;
+  width: 500%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 25s sliding ease infinite;
+}
+
+/* Slider indicator */
+.indicator {
+  width: 100%;
+  max-width: 720px;
+  height: 6px;
+  background: darkcyan;
+  position: absolute;
+  bottom: 0;
+
+  animation: indicating 5s ease infinite;
+}
+
+@keyframes sliding {
+  0% {
+    left: 0%;
+  }
+  20% {
+    left: -100%;
+  }
+  40% {
+    left: -200%;
+  }
+  60% {
+    left: -300%;
+  }
+  80% {
+    left: -400%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes indicating {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+
+/**********************/
+
+
+.main-pic{
+  position: absolute;
+  left: 8%;
+  bottom: 15%;
+  width: 50%;
+  max-height: 50%;
+  border-radius: 20px;
+  box-shadow: 1px 1px 15px darkcyan;
+
+}
+
+
+
+/**********************/
+
+#blueBar {
+  width: 100%;
+  min-height: 32px;
+  background-color: #222831;
+  color: white;
+  position: relative;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.alter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  animation: spin 5s linear infinite normal ;
+  font-size: 12px;
+}
+
+.one {
+  z-index: -1;
+  animation-delay: 0s;
+  font-size: 18px;
+}
+
+.two {
+  animation-delay:1.25s;
+  z-index:-1;
+  font-size: 18px;
+}
+
+.three {
+  animation-delay:2.5s;
+  z-index:-1;
+  font-size: 18px;
+}
+
+.four {
+  animation-delay: 3.75s;
+  z-index: -1;
+  font-size: 18px;
+}
+
+@keyframes spin {
+  0% {
+      z-index:1;
+  }
+
+  33.33% {
+      z-index:-1;
+  }
+
+  66.66% {
+      z-index:-1;
+  }
+  100%{
+      z-index:-1;
+  }
+}
+.ft {
+  background-color: #222831;
+  height: 20% !important;
+  /* display: flex; */
+  flex-wrap: wrap;
+  color: white;
+  text-transform: uppercase;
+  /* padding-left: 42%; */
+  justify-content: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 5px 5px 10px darkcyan;
+  /* width: 100%; */
+  padding-top: 15px;
+
+}
+
+
+
+.nItem{
+  font-size: 15pt !important;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+ font-weight:bold !important;
+ color: white ;
+
+}
+
+.nItem:hover{
+color: #0096c7;
+}
+.nItem:active{
+  color: black;
+  }
+
+.nb{
+  width: 100% !important;
+}
+
+
+/******/
+
+
+.profile-cont {
+  border-color: darkcyan;
+  border-style: ridge;
+  border-top: none;
+  border-bottom: none;
+  width: 20%;
+  margin-left: 2%;
+  margin-top: 2%;
+  max-height: 250px;
+  /* overflow-y: scroll; */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 139, 139, 0.349);
+
+
+}
+
+
+
+.profile-cont2 {
+  border-color: darkcyan;
+  border-style: ridge;
+  border-top: none;
+  border-bottom: none;
+  width: 20%;
+  margin-left: 2%;
+  margin-top: 2%;
+  max-height: 250px;
+  /* overflow-y: scroll; */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 192, 203, 0.74)
+}

@@ -26,7 +26,7 @@ const Profile = () => {
     image:
       "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
     status: "",
-    gender: "male",
+    gender: "female",
   });
 
   const profiles = useSelector((state) => state.profiles.profiles);
@@ -57,16 +57,18 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-cont">
-      <span style={{ color: "white", marginRight: "40%" }}>
-        <FiSettings color="black" size="2em" onClick={handleShow} />
+    <>
+    {profile && (profile.gender=="male" || !profile.gender)   ? 
+      <div className="profile-cont">
+      <span style={{ color: "darkcyan", marginRight: "40%" }}>
+        <FiSettings color="white" size="2em" onClick={handleShow} />
         &nbsp; profile setting
       </span>
 
       <h2>{user.username}</h2>
       <img
         alt="profileImage"
-        style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+        style={{ width: "80px", height: "80px", borderRadius: "50%", boxShadow:"2px 2px 3px darkcyan" }}
         src={
           profile
             ?  profile.image || "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
@@ -74,33 +76,34 @@ const Profile = () => {
         }
       />
 
-      <h5>{profile ? profile.gender : ""}</h5>
+      {/* <h5>{profile ? profile.gender : ""}</h5> */}
       <h5>{profile ? profile.status : ""}</h5>
       <>
         <Modal show={show} onHide={handleClose}>
-          <Modal.Header style={{ backgroundColor: "#353656" }} closeButton>
+          <Modal.Header style={{ backgroundColor: "#012a4a" }} closeButton>
             <Modal.Title>Profile Setting</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form
               style={{
-                backgroundColor: "#353656",
+                backgroundColor: "#012a4a",
                 margin: "auto",
                 border: "solid 3px black",
               }}
               onSubmit={handleSubmit}
             >
-              <Form.Label>gendar</Form.Label>
+              <Form.Label>gender</Form.Label>
 
               <Form.Control
-                name="gendar"
+                name="gender"
                 as="select"
                 className="mr-sm-2"
                 id="inlineFormCustomSelect"
                 onChange={handleChange}
                 custom
-                defaultValue="male"
+      
               >
+                <option value=""></option>
                 <option value="male">male</option>
                 <option value="female"> female</option>
               </Form.Control>
@@ -121,7 +124,9 @@ const Profile = () => {
               </Form.Group>
 
               <Modal.Footer>
-                <button className="btn secondary btn-primary" type="submit">
+                <button 
+                style={{backgroundColor:"darkcyan"}}
+                className="btn secondary btn-primary" type="submit">
                   Apply
                 </button>
 
@@ -134,17 +139,113 @@ const Profile = () => {
           <center>
             <button
               className="btn btn-danger"
-              style={{ width: "80px" }}
+              style={{ width: "80px", marginBottom:"10px" }}
               onClick={() => {
                 dispatch(signout(history));
               }}
             >
-              <HiOutlineLogout /> &nbsp; Logout{" "}
+              {/* <HiOutlineLogout /> &nbsp; Logout{" "} */}
+              Logout
             </button>
           </center>
         </Modal>
       </>
     </div>
+    :
+    <div className="profile-cont2">
+      <span style={{ color: "darkcyan", marginRight: "40%" }}>
+        <FiSettings color="white" size="2em" onClick={handleShow} />
+        &nbsp; profile setting
+      </span>
+
+      <h2>{user.username}</h2>
+      <img
+        alt="profileImage"
+        style={{ width: "80px", height: "80px", borderRadius: "50%", boxShadow:"2px 2px 3px darkcyan" }}
+        src={
+          profile
+            ?  profile.image || "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
+            :"https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
+        }
+      />
+
+      {/* <h5>{profile ? profile.gender : ""}</h5> */}
+      <h5>{profile ? profile.status : ""}</h5>
+      <>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header style={{ backgroundColor: "#012a4a" }} closeButton>
+            <Modal.Title>Profile Setting</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form
+              style={{
+                backgroundColor: "#012a4a",
+                margin: "auto",
+                border: "solid 3px black",
+              }}
+              onSubmit={handleSubmit}
+            >
+              <Form.Label>gender</Form.Label>
+
+              <Form.Control
+                name="gender"
+                as="select"
+                className="mr-sm-2"
+                id="inlineFormCustomSelect"
+                onChange={handleChange}
+                custom
+      
+              >
+                <option value=""></option>
+                <option value="male">male</option>
+                <option value="female"> female</option>
+              </Form.Control>
+              <Form.Group controlId="formBasicEmail">
+                <br />
+                <Form.Label>status</Form.Label>
+                <Form.Control
+                  name="status"
+                  type="text"
+                  onChange={handleChange}
+                  placeholder="status"
+                />
+              </Form.Group>
+              <Form.Group controlId="formFile" className="mb-3">
+                <br />
+                <Form.Label>your picture</Form.Label>
+                <Form.Control onChange={handleImage} name="image" type="file" />
+              </Form.Group>
+
+              <Modal.Footer>
+                <button 
+                style={{backgroundColor:"darkcyan"}}
+                className="btn secondary btn-primary" type="submit">
+                  Apply
+                </button>
+
+                <Button variant="secondary" onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+          <center>
+            <button
+              className="btn btn-danger"
+              style={{ width: "80px", marginBottom:"10px" }}
+              onClick={() => {
+                dispatch(signout(history));
+              }}
+            >
+              {/* <HiOutlineLogout /> &nbsp; Logout{" "} */}
+              Logout
+            </button>
+          </center>
+        </Modal>
+      </>
+    </div>
+    }
+    </>
   );
 };
 

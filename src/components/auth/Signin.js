@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { signin } from "../../store/actions/authActions";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import MainBar from "../Main/MainBar";
 
 const Signin = () => {
   const {
@@ -16,10 +17,25 @@ const Signin = () => {
   const onSubmit = (data) => dispatch(signin(data, history));
 
   return (
+    <>
+    <MainBar/>
     <center>
       <div className="home">
-        <h1> Welcome To The Light Speed Chat </h1>
+        <h1
+        style={{
+          marginLeft:"160px",
+        }}>  Made With Love By Lightning Team⚡  </h1>
+  
+            <div>
+                <figure>
+                    <img
+                    className="main-pic"
+                     src="https://www.bgnevents.com/wp-content/uploads/2016/03/bgn-event-about-us.jpg" alt="Image"/>
+
+                </figure>    
+              </div>
       </div>
+
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h2>Signin</h2>
         <hr style={{ width: "35%" }} />
@@ -31,7 +47,7 @@ const Signin = () => {
           {...register("username", { required: true })}
         />
         {errors.username && errors.username.type === "required" && (
-          <span role="alert">you have to enter your username</span>
+          <span role="alert">username is required</span>
         )}
         <input
           placeholder="enter password"
@@ -41,10 +57,12 @@ const Signin = () => {
           {...register("password", { required: true })}
         />
         {errors.password && errors.password.type === "required" && (
-          <span role="alert">you have to enter your password</span>
+          <span role="alert"> password is required</span>
         )}
         <br />
-        <button type="submit" className="btn btn-dark">
+        <button 
+        style={{backgroundColor:"darkcyan"}}
+        type="submit" className="btn btn-dark">
           Submit
         </button>
         <p>
@@ -55,6 +73,7 @@ const Signin = () => {
         </p>
       </form>
     </center>
+    </>
   );
 };
 

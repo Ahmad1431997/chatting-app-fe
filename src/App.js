@@ -11,9 +11,12 @@ import MainPage from "./components/Main/MainPage";
 import Room from "./components/Room/Room";
 import { useSelector } from "react-redux";
 
+
 function App() {
   const user = useSelector((state) => state.user.user);
   return (
+    <>
+    
     <Switch>
       <Route path="/rooms/:roomId">{user && <Room />}</Route>
 
@@ -26,6 +29,7 @@ function App() {
         <Signin />
       </Route>
     </Switch>
+    </>
   );
 }
 
