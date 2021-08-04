@@ -15,7 +15,7 @@ const messageReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_MESSAGE_FROM_BOTH:
       const messageToKeep = state.messages.filter(
-        (message) => message.id !== action.payload.messageId
+        (message) => message.id !== action.payload
       );
       return {
         ...state,
