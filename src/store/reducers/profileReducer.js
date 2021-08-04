@@ -21,6 +21,7 @@ const profileReducer = (state = initialState, action) => {
         profiles: state.profiles.map((profile) =>
           profile.id === updatedProfile.id ? updatedProfile : profile
         ),
+        
       };
     default:
       return state;

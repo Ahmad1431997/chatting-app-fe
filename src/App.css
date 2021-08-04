@@ -39,30 +39,38 @@ span {
   font-weight: bold;
 }
 .room-cont {
+  
   background-image: url("https://images-ext-1.discordapp.net/external/BUqzOfVJD1waKp4wgSyYpyYJ5PKwwpdw4NosUNyhtig/https/thumbs.dreamstime.com/b/seamless-mobile-apps-pattern-web-page-64452032.jpg?width=468&height=468");
   position: absolute;
   left: 28%;
   top: 2.25%;
-  width: 70%;
+  width: 67%;
   min-height: 95%;
   max-height: 95%;
   overflow-y: scroll;
+  scroll-margin-bottom: 100px;
+  box-shadow: 3px 3px 15px #eee;
+
   /* height: 100% !important; */
 }
 .room-head {
   z-index: 1;
-  background-color: #353656;
+  color: #353656;
+  background-color: #35365652;
   min-height: 50px;
   /* text-align: center; */
-  padding-left: 30%;
-  width: 100%;
+  padding-left: 5%;
+  width: 67%;
+  font-size: 24pt;
+  position: fixed;
+
 }
 .footer {
-  /* position: relative; */
-  z-index: 3;
-  min-height: 40px;
-  max-height: 40px;
-  margin-top: 80%;
+  position: fixed;
+  width: 68% !important;
+ margin-left:27.5%;
+ margin-top: 0.65%;
+
 }
 
 form {
@@ -73,8 +81,10 @@ form {
 }
 
 .body-recive {
+  margin-bottom: 59.59px;
+
   position: relative;
-  margin-left: 60%;
+  margin-left: 5%;
   width: fit-content;
   overflow-y: scroll;
   margin-top: 2.5%;
@@ -95,7 +105,7 @@ form {
 .body-send {
   position: relative;
   margin-top: 2.5%;
-
+  margin-bottom: 59.59px;
   width: fit-content;
   overflow-y: scroll;
 
@@ -113,7 +123,7 @@ form {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  margin-left: 40%;
+  margin-left: 70%;
 }
 
 /* edeting */

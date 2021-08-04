@@ -1,28 +1,39 @@
 import { Button, Modal, Form, Spinner } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "@react-icons/all-files/fi/FiSettings";
-import { updateProfile } from "../../store/actions/profileActions";
-import { signout } from "../../store/actions/authActions";
+import {
+  fetchProfiles,
+  updateProfile,
+} from "../../store/actions/profileActions";
+import { fetchUsers, signout } from "../../store/actions/authActions";
 import { useHistory } from "react-router";
 import { HiOutlineLogout } from "@react-icons/all-files/hi/HiOutlineLogout";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  useEffect(() => {
+    dispatch(fetchProfiles());
+    dispatch(fetchUsers());
+  }, []);
+
+  const user = useSelector((state) => state.user.user);
+  console.log();
   const [show, setShow] = useState(false);
   const [_profile, setProfile] = useState({
-    image: "",
+    image:
+      "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
     status: "",
     gender: "male",
   });
-  const user = useSelector((state) => state.user.user);
+
   const profiles = useSelector((state) => state.profiles.profiles);
   const loadingprofile = useSelector((state) => state.profiles.loading);
 
   if (loadingprofile) return <Spinner />;
-  const profile = profiles.find((profile) => profile.userId === user.id);
+  const profile = profiles.find((profile) => profile.userId == user.id);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,6 +55,7 @@ const Profile = () => {
       gender: "",
     });
   };
+
   return (
     <div className="profile-cont">
       <span style={{ color: "white", marginRight: "40%" }}>
@@ -56,9 +68,9 @@ const Profile = () => {
         alt="profileImage"
         style={{ width: "80px", height: "80px", borderRadius: "50%" }}
         src={
-          profile.image
-            ? profile.image
-            : "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
+          profile
+            ?  profile.image || "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
+            :"https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png"
         }
       />
 

@@ -44,7 +44,6 @@ function Room() {
     dispatch(deleteMessage(messageId));
   };
   const handleDeleteFromBoth = (messageId) => {
-    console.log(messageId);
     if (messageId)
       socket.emit("messageDelete", {
         messageId,
@@ -54,17 +53,15 @@ function Room() {
   useEffect(() => {
     setSocket(io("localhost:8080"));
   }, []);
+
   useEffect(() => {
-    console.log("hi");
     if (socket) {
       socket.off("messageDelete");
       socket.on("messageDelete", (messageId) => {
+        console.log(messageId);
+
         dispatch(deleteMessageFromBoth(messageId));
       });
-    }
-  }, []);
-  useEffect(() => {
-    if (socket) {
       socket.off("message");
       socket.on("message", ({ message }) => {
         dispatch(createMessage(message));
@@ -75,6 +72,10 @@ function Room() {
   useEffect(() => {
     el.current.scrollIntoView({ block: "end" });
   });
+
+ 
+  
+ 
 
   const title = () => {
     if (loading) return <Spinner />;
@@ -136,18 +137,19 @@ function Room() {
             ))
           : ""}
 
-        <div className="footer">
-          <IoMdSend
-            cleanOnEnter
-            onEnter={handleOnEnter}
-            placeholder="Type a message..."
-            style={{
-              width: "40px",
-              height: "30px",
-            }}
-          />
-        </div>
+     
+       
       </div>
+      <span className="footer">
+        
+
+          <IoMdSend
+          cleanOnEnter
+          onEnter={handleOnEnter}
+          placeholder="Type a message..."
+          
+          />
+          </span>
     </div>
   );
 }
