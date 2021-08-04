@@ -3,6 +3,7 @@ import {
   FETCH_MESSAGES,
   DELETE_MESSAGE,
   DELETE_MESSAGE_FROM_BOTH,
+  UPDATE_MESSAGE,
 } from "../actions/types";
 
 const initialState = {
@@ -39,6 +40,15 @@ const messageReducer = (state = initialState, action) => {
         ...state,
         messages: action.payload,
         loading: false,
+      };
+
+      case UPDATE_MESSAGE:
+      const updatedmessage = action.payload;
+      return {
+        ...state,
+        messages: state.messages.map((message) =>
+          message.id === updatedmessage.id ? updatedmessage : message
+        ),
       };
 
     default:
